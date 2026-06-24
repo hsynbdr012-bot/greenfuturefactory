@@ -1,19 +1,21 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // نستخدم محددات عامة للتأكد من التقاط العناصر
-    const trackBtn = document.querySelector('button'); // يلتقط أول زر في الصفحة
-    const orderInput = document.querySelector('input'); // يلتقط أول خانة إدخال
+    // إخفاء شاشة التحميل فوراً لضمان عمل الموقع
+    const loader = document.getElementById('loader');
+    if (loader) {
+        loader.style.display = 'none';
+    }
+
+    // نظام البحث البسيط
+    const trackBtn = document.querySelector('button'); 
+    const orderInput = document.querySelector('input'); 
     
     if (trackBtn && orderInput) {
-        trackBtn.addEventListener('click', (e) => {
-            e.preventDefault(); // منع الصفحة من إعادة التحميل
+        trackBtn.addEventListener('click', () => {
             const query = orderInput.value.trim();
-            
-            console.log("تم الضغط، القيمة المدخلة هي: " + query); // للمراقبة
-
             if (query === "بدر محمد" || query === "2026") {
-                alert("✅ تم العثور على طلب العميل: بدر محمد\nالحالة: في قسم التجميع والكبس\nنسبة الإنجاز: 60%");
+                alert("✅ العميل: بدر محمد | الحالة: في قسم التجميع والكبس | الإنجاز: 60%");
             } else {
-                alert("❌ عذراً، لم يتم العثور على طلب بهذا الاسم أو الرقم.");
+                alert("❌ لم يتم العثور على طلب بهذا الاسم أو الرقم.");
             }
         });
     }
