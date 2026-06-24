@@ -1,46 +1,20 @@
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener('DOMContentLoaded', () => {
+    // نستخدم محددات عامة للتأكد من التقاط العناصر
+    const trackBtn = document.querySelector('button'); // يلتقط أول زر في الصفحة
+    const orderInput = document.querySelector('input'); // يلتقط أول خانة إدخال
+    
+    if (trackBtn && orderInput) {
+        trackBtn.addEventListener('click', (e) => {
+            e.preventDefault(); // منع الصفحة من إعادة التحميل
+            const query = orderInput.value.trim();
+            
+            console.log("تم الضغط، القيمة المدخلة هي: " + query); // للمراقبة
 
-const btn = document.getElementById("trackBtn");
-const input = document.getElementById("orderInput");
-const result = document.getElementById("trackingResult");
-
-if (!btn || !input || !result) {
-    console.log("عناصر التتبع غير موجودة");
-    return;
-}
-
-btn.addEventListener("click", function () {
-
-    const search = input.value.trim();
-
-    if (search === "بدر") {
-
-        result.innerHTML = `
-        <div style="background:#1f2937;padding:20px;border-radius:10px;color:white;">
-            <h3>📦 تتبع الطلب</h3>
-            <p>العميل: بدر محمد</p>
-            <p>رقم الطلب: GF001</p>
-            <p>الحالة: جاري التصنيع</p>
-            <p>الموقع الحالي: قسم التجميع والكبس</p>
-
-            <div style="background:#444;height:20px;border-radius:10px;overflow:hidden;">
-                <div style="background:#22c55e;height:100%;width:60%;"></div>
-            </div>
-
-            <p style="margin-top:10px;">نسبة الإنجاز 60%</p>
-        </div>
-        `;
-
-    } else {
-
-        result.innerHTML = `
-        <div style="color:red;padding:15px;">
-            لا يوجد طلب بهذا الاسم
-        </div>
-        `;
-
+            if (query === "بدر محمد" || query === "2026") {
+                alert("✅ تم العثور على طلب العميل: بدر محمد\nالحالة: في قسم التجميع والكبس\nنسبة الإنجاز: 60%");
+            } else {
+                alert("❌ عذراً، لم يتم العثور على طلب بهذا الاسم أو الرقم.");
+            }
+        });
     }
-
-});
-
 });
