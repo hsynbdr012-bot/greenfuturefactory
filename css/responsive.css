@@ -1,0 +1,40 @@
+/* الشاشات المتوسطة (الأيباد والتابلت) */
+@media (max-width: 992px) {
+    .hero-title { font-size: 36px; }
+    .hero-subtitle { font-size: 18px; }
+    .about-grid { grid-template-columns: 1fr; gap: 30px; }
+    .about-img-box { height: 300px; }
+    .glass-card-info { bottom: 10px; right: 10px; padding: 15px 20px; }
+    .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    .footer-grid { grid-template-columns: 1fr; gap: 30px; }
+}
+
+/* شاشات الجوال الذكية */
+@media (max-width: 768px) {
+    .header-container { padding: 15px 5%; }
+    .nav-menu {
+        position: fixed; top: 70px; right: -100%; width: 100%; height: calc(100vh - 70px);
+        background: rgba(13, 58, 43, 0.98); backdrop-filter: blur(15px);
+        transition: var(--transition); z-index: 999;
+    }
+    .nav-menu.active { right: 0; }
+    .nav-menu ul { flex-direction: column; padding: 40px 0; text-align: center; }
+    .nav-menu ul li { margin: 20px 0; }
+    .nav-menu ul li a { color: var(--white); font-size: 18px; }
+    
+    .menu-toggle { display: block; color: var(--secondary-color); }
+    .btn-call-header { display: none; }
+    
+    .hero-title { font-size: 28px; }
+    .hero-desc { font-size: 14px; }
+    .hero-buttons a { width: 100%; margin: 8px 0; }
+    
+    .tracking-search-box { padding: 20px; }
+    .search-input-group { flex-direction: column; }
+    .btn-search { padding: 15px; width: 100%; }
+    
+    .steps-container { flex-direction: column; align-items: flex-start; gap: 25px; padding-right: 20px; }
+    .step-node { flex-direction: row; text-align: right; width: 100%; gap: 15px; }
+    .progress-line-background { display: none; }
+    .step-text { margin-top: 0; font-size: 13px; }
+}
