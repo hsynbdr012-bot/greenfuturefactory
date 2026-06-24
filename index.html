@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>مصنع جرين فيوتشر للأبواب</title>
+<title>Green Future Factory</title>
 
 <style>
 
@@ -12,93 +12,76 @@
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:Tahoma;
+font-family:Arial;
 }
 
 body{
 
-background:#0d0d0d;
+background:#111;
+
 color:white;
 
 }
 
 header{
 
-height:100vh;
+background:#0f7c3f;
 
-background:linear-gradient(rgba(0,0,0,.7),rgba(0,0,0,.7)),url('https://images.unsplash.com/photo-1513694203232-719a280e022f?w=1600');
-
-background-size:cover;
-
-background-position:center;
-
-display:flex;
-
-justify-content:center;
-
-align-items:center;
+padding:80px 20px;
 
 text-align:center;
 
-padding:20px;
+}
+
+header h1{
+
+font-size:45px;
 
 }
 
-h1{
+header p{
 
-font-size:55px;
+margin-top:15px;
 
-color:#00ff88;
-
-margin-bottom:20px;
-
-animation:fade 1s;
+font-size:20px;
 
 }
 
-p{
+.btn{
 
-font-size:22px;
+display:inline-block;
 
-line-height:40px;
+margin:10px;
 
-}
+padding:15px 35px;
 
-button{
+background:white;
 
-margin-top:30px;
+color:#0f7c3f;
 
-padding:15px 40px;
-
-border:none;
+text-decoration:none;
 
 border-radius:50px;
 
-background:#00ff88;
-
-font-size:22px;
-
-cursor:pointer;
-
 font-weight:bold;
+
+transition:.3s;
+
+}
+
+.btn:hover{
+
+transform:scale(1.1);
 
 }
 
 section{
 
-padding:80px 20px;
+padding:60px 20px;
 
-}
+max-width:1200px;
 
-.title{
-
-font-size:40px;
-
-color:#00ff88;
-
-text-align:center;
-
-margin-bottom:40px;
+margin:auto;
 
 }
 
@@ -108,21 +91,19 @@ display:grid;
 
 grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
 
-gap:25px;
+gap:20px;
 
 }
 
 .card{
 
-background:#181818;
+background:#222;
 
-padding:30px;
+padding:25px;
 
-border-radius:20px;
+border-radius:15px;
 
-text-align:center;
-
-transition:.4s;
+transition:.3s;
 
 }
 
@@ -130,123 +111,15 @@ transition:.4s;
 
 transform:translateY(-10px);
 
-background:#00aa55;
-
-}
-
-.stats{
-
-display:grid;
-
-grid-template-columns:repeat(3,1fr);
-
-text-align:center;
-
-margin-top:40px;
-
-}
-
-.number{
-
-font-size:55px;
-
-color:#00ff88;
-
-font-weight:bold;
-
 }
 
 footer{
 
-padding:50px;
+padding:30px;
+
+background:#000;
 
 text-align:center;
-
-background:#111;
-
-}
-
-.whatsapp{
-
-position:fixed;
-
-bottom:20px;
-
-left:20px;
-
-background:#25d366;
-
-width:70px;
-
-height:70px;
-
-border-radius:50%;
-
-display:flex;
-
-justify-content:center;
-
-align-items:center;
-
-font-size:35px;
-
-text-decoration:none;
-
-color:white;
-
-box-shadow:0 0 20px #25d366;
-
-}
-
-.call{
-
-position:fixed;
-
-bottom:100px;
-
-left:20px;
-
-background:#00ff88;
-
-width:70px;
-
-height:70px;
-
-border-radius:50%;
-
-display:flex;
-
-justify-content:center;
-
-align-items:center;
-
-font-size:35px;
-
-text-decoration:none;
-
-color:black;
-
-font-weight:bold;
-
-}
-
-@keyframes fade{
-
-from{
-
-opacity:0;
-
-transform:translateY(-40px);
-
-}
-
-to{
-
-opacity:1;
-
-transform:translateY(0);
-
-}
 
 }
 
@@ -258,129 +131,45 @@ transform:translateY(0);
 
 <header>
 
-<div>
+<h1>Green Future Factory</h1>
 
-<h1>جرين فيوتشر للأبواب</h1>
+<p>مصنع جرين فيوتشر للأبواب</p>
 
-<p>
+<a class="btn" href="tel:+966500000000">اتصل الآن</a>
 
-أبواب داخلية وخارجية بجودة عالية وتصاميم عصرية تناسب جميع المشاريع والمنازل.
-
-</p>
-
-<button onclick="document.getElementById('services').scrollIntoView()">
-
-استعرض خدماتنا
-
-</button>
-
-</div>
+<a class="btn" href="https://wa.me/966500000000">واتساب</a>
 
 </header>
 
 <section>
 
-<div class="stats">
+<h2>خدماتنا</h2>
 
-<div>
-
-<div class="number" id="n1">0</div>
-
-عميل سعيد
-
-</div>
-
-<div>
-
-<div class="number" id="n2">0</div>
-
-باب تم تركيبه
-
-</div>
-
-<div>
-
-<div class="number" id="n3">0</div>
-
-سنوات خبرة
-
-</div>
-
-</div>
-
-</section>
-
-<section id="services">
-
-<h2 class="title">
-
-خدماتنا
-
-</h2>
+<br>
 
 <div class="cards">
 
 <div class="card">
 
-<h3>
+<h3>أبواب WPC</h3>
 
-أبواب WPC
-
-</h3>
-
-<p>
-
-مقاومة للماء والرطوبة.
-
-</p>
+<p>جودة عالية وتصميم عصري.</p>
 
 </div>
 
 <div class="card">
 
-<h3>
+<h3>أبواب داخلية</h3>
 
-أبواب PVC
-
-</h3>
-
-<p>
-
-جودة عالية وتشطيب فاخر.
-
-</p>
+<p>تشطيبات احترافية وضمان جودة.</p>
 
 </div>
 
 <div class="card">
 
-<h3>
+<h3>تفصيل حسب الطلب</h3>
 
-تفصيل حسب الطلب
-
-</h3>
-
-<p>
-
-تنفيذ جميع المقاسات والألوان.
-
-</p>
-
-</div>
-
-<div class="card">
-
-<h3>
-
-تركيب احترافي
-
-</h3>
-
-<p>
-
-فريق متخصص وسرعة في الإنجاز.
-
-</p>
+<p>مقاسات وألوان تناسب جميع المشاريع.</p>
 
 </div>
 
@@ -390,29 +179,27 @@ transform:translateY(0);
 
 <section>
 
-<h2 class="title">
+<h2>لماذا نحن؟</h2>
 
-لماذا نحن؟
-
-</h2>
+<br>
 
 <div class="cards">
 
 <div class="card">
 
-✔ خامات ممتازة
+✔ جودة عالية
+
+</div>
+
+<div class="card">
+
+✔ تركيب احترافي
 
 </div>
 
 <div class="card">
 
 ✔ أسعار منافسة
-
-</div>
-
-<div class="card">
-
-✔ ضمان على المنتجات
 
 </div>
 
@@ -428,65 +215,9 @@ transform:translateY(0);
 
 <footer>
 
-<h2>
-
-جرين فيوتشر للأبواب
-
-</h2>
-
-<br>
-
-المدينة المنورة
-
-<br><br>
-
-جودة تبدأ من الباب.
+© Green Future Factory
 
 </footer>
-
-<a class="whatsapp" href="https://wa.me/9665XXXXXXXX">
-
-💬
-
-</a>
-
-<a class="call" href="tel:+9665XXXXXXXX">
-
-☎
-
-</a>
-
-<script>
-
-function counter(id,end){
-
-let n=0;
-
-let x=setInterval(function(){
-
-n+=Math.ceil(end/100);
-
-document.getElementById(id).innerHTML=n+"+";
-
-if(n>=end){
-
-document.getElementById(id).innerHTML=end+"+";
-
-clearInterval(x);
-
-}
-
-},20);
-
-}
-
-counter("n1",1000);
-
-counter("n2",5000);
-
-counter("n3",10);
-
-</script>
 
 </body>
 
