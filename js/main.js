@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (mockOrders[orderId]) {
                 const order = mockOrders[orderId];
                 trackingResult.innerHTML = `
-                    <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; border-right: 4px solid ${order.color}; direction: rtl;">
+                    <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; border-right: 4px solid ${order.color}; direction: rtl; text-align: right;">
                         <p style="margin-bottom: 8px;"><strong>حالة الطلب:</strong> <span style="color: ${order.color};">${order.status}</span></p>
                         <div style="background: #222; border-radius: 10px; height: 10px; width: 100%; overflow: hidden; margin-top: 10px;">
                             <div style="background: ${order.color}; width: ${order.progress}; height: 100%; transition: width 0.5s ease;"></div>
@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 `;
             } else {
                 trackingResult.innerHTML = `
-                    <div style="background: rgba(231, 76, 60, 0.1); padding: 15px; border-radius: 8px; border-right: 4px solid #e74c3c; direction: rtl;">
+                    <div style="background: rgba(231, 76, 60, 0.1); padding: 15px; border-radius: 8px; border-right: 4px solid #e74c3c; direction: rtl; text-align: right;">
                         <p style="color: #e74c3c; margin: 0;">رقم الطلب غير صحيح أو غير مسجل بالنظام حالياً. (جرب الأرقام التجريبية: 1010، 2020، 3030، 4040)</p>
                     </div>
                 `;
