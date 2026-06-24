@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const trackingResult = document.getElementById('trackingResult');
 
     if (trackBtn && orderInput && trackingResult) {
-        // قاعدة بيانات الطلبات
+        // قاعدة بيانات الطلبات المعتمدة
         const mockOrders = {
             "1010": { name: "عميل تجريبي", status: "في مرحلة التصميم والقص السينمائي (CNC)", progress: "25%", color: "#d4af37", icon: "📐", details: "جاري تجهيز وتدقيق الأبعاد الفنية للمواد" },
             "2020": { name: "عميل تجريبي", status: "في قسم التجميع والكبس الحراري وبناء الهيكل", progress: "50%", color: "#3498db", icon: "🛠️", details: "تحت المكبس الحراري لتثبيت دعامات الـ WPC" },
@@ -79,11 +79,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
             let foundOrder = null;
 
-            // البحث برقم الطلب
+            // البحث برقم الطلب أولاً
             if (mockOrders[searchInput]) {
                 foundOrder = mockOrders[searchInput];
             } else {
-                // البحث بالاسم
+                // البحث الذكي بمطابقة جزء من الاسم
                 for (let key in mockOrders) {
                     if (mockOrders[key].name.toLowerCase().includes(searchInput)) {
                         foundOrder = mockOrders[key];
@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             if (foundOrder) {
-                // تصميم البطاقة المطور والفاخر للعميل
+                // تصميم البطاقة الفاخرة للنتيجة
                 trackingResult.innerHTML = `
                     <div style="background: rgba(255, 255, 255, 0.08); padding: 25px; border-radius: 12px; border-right: 5px solid ${foundOrder.color}; direction: rtl; text-align: right; color: #fff; box-shadow: 0 4px 15px rgba(0,0,0,0.2); font-family: sans-serif; margin-top: 20px;">
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
@@ -123,7 +123,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                 `;
             } else {
-                // رسالة الخطأ إذا لم يعثر على العميل
+                // رسالة عدم العثور على العميل
                 trackingResult.innerHTML = `
                     <div style="background: rgba(231, 76, 60, 0.15); padding: 18px; border-radius: 10px; border-right: 5px solid #e74c3c; direction: rtl; text-align: right; font-family: sans-serif; color: #fff; margin-top: 20px;">
                         <p style="color: #e74c3c; font-weight: bold; margin: 0 0 5px 0; font-size: 16px;">⚠️ لم يتم العثور على نتائج بحث</p>
