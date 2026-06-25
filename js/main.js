@@ -1,15 +1,18 @@
-// كود شامل: يشغل الموقع ويضيف البحث دون تداخل
-window.addEventListener('load', () => {
-    // 1. إخفاء شاشة التحميل الأصلية (تأكد أن ID الخاص بها هو 'loader')
-    const loader = document.getElementById('loader');
-    if (loader) {
-        loader.style.opacity = '0';
-        setTimeout(() => { loader.style.display = 'none'; }, 500);
-    }
-});
-
 document.addEventListener('DOMContentLoaded', () => {
-    // 2. تشغيل العدادات (الخبرة والأبواب)
+    // 1. إخفاء شاشة التحميل (Loader)
+    const loader = document.getElementById('loader');
+    if (loader) loader.style.display = 'none';
+
+    // 2. تفعيل القائمة الجانبية (الثلاث خطوط)
+    const menuToggle = document.querySelector('.menu-toggle'); // تأكد من الكلاس
+    const navMenu = document.querySelector('.nav-menu');
+    if (menuToggle && navMenu) {
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+    }
+
+    // 3. تشغيل العدادات
     const stats = document.querySelectorAll('.stat-number');
     stats.forEach(counter => {
         const target = +counter.getAttribute('data-target');
@@ -20,40 +23,39 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (count < target) {
                     counter.innerText = count;
                     setTimeout(update, 20);
-                } else {
-                    counter.innerText = target;
-                }
+                } else { counter.innerText = target; }
             };
             update();
         }
     });
 
-    // 3. نظام البحث المدمج
-    const trackBtn = document.getElementById('trackBtn'); // تأكد من اسم ID في HTML
-    const orderInput = document.getElementById('orderInput'); // تأكد من اسم ID في HTML
-    
+    // 4. نظام البحث (بدر محمد)
+    const trackBtn = document.getElementById('trackBtn');
+    const orderInput = document.getElementById('orderInput');
+    const resultArea = document.getElementById('result-area') || document.createElement('div');
+    resultArea.id = 'result-area';
+    if(orderInput) orderInput.parentNode.appendChild(resultArea);
+
     if (trackBtn && orderInput) {
         trackBtn.addEventListener('click', () => {
-            const query = orderInput.value.trim();
-            const orders = { "2026": { name: "بدر محمد", status: "في قسم التجميع والكبس", progress: "60%", color: "#27ae60" } };
-            
-            let resultDiv = document.getElementById('result-area');
-            if (!resultDiv) {
-                resultDiv = document.createElement('div');
-                resultDiv.id = 'result-area';
-                orderInput.parentNode.appendChild(resultDiv);
-            }
-
-            const data = orders[query] || (query === "بدر محمد" ? orders["2026"] : null);
-            if (data) {
-                resultDiv.innerHTML = `<div style="background:#fff; padding:15px; margin-top:10px; border-right:5px solid ${data.color};">
-                    <h4>العميل: ${data.name}</h4>
-                    <p>الحالة: ${data.status}</p>
-                    <div style="background:#eee; height:10px;"><div style="width:${data.progress}; background:${data.color}; height:100%;"></div></div>
+            const val = orderInput.value.trim();
+            // البحث عن "بدر محمد" أو الرقم
+            if (val.includes("بدر") || val === "2026") {
+                resultArea.innerHTML = `<div style="background:#27ae60; color:#fff; padding:15px; border-radius:8px; margin-top:10px;">
+                    <h4>العميل: بدر محمد</h4>
+                    <p>الحالة: في قسم التجميع والكبس (نسبة الإنجاز: 60%)</p>
                 </div>`;
             } else {
-                resultDiv.innerHTML = `<p style="color:red;">غير موجود</p>`;
+                resultArea.innerHTML = `<p style="color:red;">عذراً، لم يتم العثور على طلب.</p>`;
             }
+        });
+    }
+
+    // 5. تفعيل نموذج طلب عرض السعر
+    const quoteBtn = document.getElementById('quoteBtn');
+    if (quoteBtn) {
+        quoteBtn.addEventListener('click', () => {
+            alert("تم استلام طلبك! سنتواصل معك قريباً.");
         });
     }
 });
