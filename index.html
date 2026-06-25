@@ -4,46 +4,49 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>مصنع المستقبل الأخضر | أبواب WPC</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <link rel="stylesheet" href="./css/style.css">
-    <link rel="stylesheet" href="./css/animations.css">
 </head>
 <body>
-
-    <div id="loader" class="loader-container">
-        <div class="spinner"></div>
-    </div>
+    <div id="loader" class="loader-container">جاري التحميل...</div>
 
     <header class="main-header">
-        <div class="header-container">
-            <div class="logo">مصنع المستقبل الأخضر</div>
-            <nav id="navMenu" class="nav-menu">
-                <ul>
-                    <li><a href="#">الرئيسية</a></li>
-                    <li><a href="#tracking">تتبع الطلب</a></li>
-                </ul>
-            </nav>
-            <div id="mobileMenuBtn" class="menu-toggle">☰</div>
-        </div>
+        <div class="logo">مصنع المستقبل الأخضر</div>
+        <nav class="nav-menu">
+            <ul><li>الرئيسية</li><li>الخدمات</li><li>معرض الأعمال</li><li>تتبع الطلب</li></ul>
+        </nav>
     </header>
 
     <section class="hero-section">
-        <div class="hero-content">
-            <h1 class="hero-title">جودة تدوم للمستقبل</h1>
+        <h1 class="hero-title">مصنع المستقبل الأخضر للأبواب</h1>
+        <p class="hero-desc">نصنع الأبواب الداخلية بجودة عالية وتشطيبات عصرية</p>
+    </section>
+
+    <section class="stats-grid">
+        <div class="stat-item"><i class="fas fa-star"></i><h3 class="stat-number" data-target="9">0</h3><p>سنوات خبرة</p></div>
+        <div class="stat-item"><i class="fas fa-building"></i><h3 class="stat-number" data-target="300">0</h3><p>مشروع</p></div>
+        <div class="stat-item"><i class="fas fa-door-open"></i><h3 class="stat-number" data-target="15000">0</h3><p>باب تم تصنيعه</p></div>
+        <div class="stat-item"><i class="fas fa-users"></i><h3 class="stat-number" data-target="98">0%</h3><p>رضا العملاء</p></div>
+    </section>
+
+    <section class="services-section">
+        <h2>خدماتنا</h2>
+        <div class="services-grid">
+            <div class="service-card">توريد وتركيب</div>
+            <div class="service-card">أبواب WPC</div>
+            <div class="service-card">مشاريع سكنية</div>
         </div>
     </section>
 
-    <section id="tracking" class="section-padding">
-        <div class="tracking-search-box">
-            <input type="text" id="orderSearchInput" placeholder="أدخل رقم الطلب">
-            <button id="btnSearchOrder">بحث</button>
-        </div>
-        <div id="trackingResultContainer" class="hidden">
-            <p>اسم العميل: <span id="lblCustomerName"></span></p>
-            <div class="progress-line-background">
-                <div id="progressLineFill" class="progress-line-fill"></div>
-            </div>
-        </div>
+    <section id="tracking" class="tracking-section">
+        <h2>تتبع طلبك</h2>
+        <input type="text" placeholder="أدخل رقم الطلب">
+        <button class="btn-track">تتبع الطلب</button>
     </section>
+
+    <footer class="footer">
+        <p>جميع الحقوق محفوظة لمصنع المستقبل الأخضر</p>
+    </footer>
 
     <script src="./js/main.js"></script>
 </body>
