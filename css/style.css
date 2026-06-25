@@ -1,12 +1,37 @@
-body { font-family: 'Cairo', sans-serif; margin: 0; background: #f9f9f9; }
-.loader-container { position: fixed; width: 100%; height: 100%; background: #0d3a2b; color: white; display: flex; justify-content: center; align-items: center; z-index: 9999; }
-.main-header { display: flex; justify-content: space-between; padding: 20px; background: white; }
-.hero-section { background: #0d3a2b; color: white; padding: 60px 20px; text-align: center; }
-.stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); padding: 40px; background: #1a1a1a; color: white; text-align: center; }
-.services-section { padding: 40px; text-align: center; }
-.services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; padding: 20px; }
-.service-card { padding: 30px; background: white; border: 1px solid #ddd; }
-.tracking-section { padding: 40px; background: white; text-align: center; }
-.btn-track { background: #0d3a2b; color: white; padding: 10px 20px; border: none; cursor: pointer; }
-.footer { background: #333; color: white; text-align: center; padding: 20px; }
-@media (max-width: 768px) { .stats-grid, .services-grid { grid-template-columns: 1fr; } }
+/* تنسيق عام فخم */
+body { font-family: 'Cairo', sans-serif; margin: 0; background-color: #f4f4f4; color: #333; }
+
+/* قسم العدادات الفخم */
+.stats-grid { 
+    display: grid; 
+    grid-template-columns: repeat(4, 1fr); 
+    background: #0d3a2b; 
+    color: white; 
+    padding: 40px 20px; 
+    text-align: center; 
+    border-radius: 15px;
+    margin: 20px;
+}
+.stat-item h3 { font-size: 2.5em; margin: 0; color: #d4af37; }
+
+/* قسم الخدمات الاحترافي */
+.services-grid { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+    gap: 20px; 
+    padding: 20px; 
+}
+.service-card { 
+    background: white; 
+    padding: 30px; 
+    border-radius: 10px; 
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
+    text-align: center; 
+    transition: 0.3s;
+}
+.service-card:hover { transform: translateY(-10px); }
+
+/* تنسيق الجوال */
+@media (max-width: 768px) { 
+    .stats-grid { grid-template-columns: repeat(2, 1fr); } 
+}
