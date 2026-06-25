@@ -1,64 +1,107 @@
-document.addEventListener('DOMContentLoaded', () => {
-    
-    // 1. إخفاء شاشة التحميل (Loader)
-    const loader = document.getElementById('loader');
-    if (loader) loader.style.display = 'none';
+document.addEventListener('DOMContentLoaded', function () {
 
-    // 2. تشغيل العدادات (الخبرة والأبواب)
-    const stats = document.querySelectorAll('.stat-number');
-    stats.forEach(counter => {
-        const target = +counter.getAttribute('data-target');
-        if (target) {
-            let count = 0;
-            const update = () => {
-                count += Math.ceil(target / 50);
-                if (count < target) {
-                    counter.innerText = count;
-                    setTimeout(update, 20);
-                } else { counter.innerText = target; }
-            };
-            update();
-        }
+    // إخفاء شاشة التحميل
+    const loader = document.getElementById('loader');
+    if (loader) {
+        loader.style.display = 'none';
+    }
+
+    // حركة الأرقام
+    const counters = document.querySelectorAll('.stat-number');
+
+    counters.forEach(counter => {
+        const target = parseInt(counter.getAttribute('data-target')) || 0;
+        let count = 0;
+
+        const updateCounter = () => {
+            const increment = Math.ceil(target / 100);
+
+            if (count < target) {
+                count += increment;
+                counter.innerText = count;
+                setTimeout(updateCounter, 20);
+            } else {
+                counter.innerText = target;
+            }
+        };
+
+        updateCounter();
     });
 
-    // 3. نظام البحث عن العملاء
+    // قاعدة بيانات العملاء
+    const orders = {
+        "بدر": {
+            customer: "بدر الصبحي",
+            status: "في قسم التجميع والكبس",
+            progress: 60
+        },
+
+        "محمد": {
+            customer: "محمد أحمد",
+            status: "جاهز للتركيب",
+            progress: 100
+        },
+
+        "2026": {
+            customer: "عميل تجريبي",
+            status: "جاري التصنيع",
+            progress: 35
+        }
+    };
+
+    // البحث
     const trackBtn = document.getElementById('trackBtn');
     const orderInput = document.getElementById('orderInput');
-    const resultArea = document.getElementById('result-area') || document.createElement('div');
-    resultArea.id = 'result-area';
-    if(orderInput && !document.getElementById('result-area')) orderInput.parentNode.appendChild(resultArea);
+    const resultArea = document.getElementById('result-area');
 
-    if (trackBtn && orderInput) {
-        trackBtn.addEventListener('click', (e) => {
+    if (trackBtn && orderInput && resultArea) {
+
+        trackBtn.addEventListener('click', function (e) {
+
             e.preventDefault();
-            const val = orderInput.value.trim();
-            if (val === "بدر محمد" || val === "2026") {
-                resultArea.innerHTML = `<div style="background:#27ae60; color:#fff; padding:15px; border-radius:8px; margin-top:10px; text-align:right;">
-                    <h4>العميل: بدر محمد</h4>
-                    <p>الحالة: في قسم التجميع والكبس</p>
-                    <div style="background:#fff; height:10px; border-radius:5px;"><div style="width:60%; background:#2ecc71; height:100%;"></div></div>
-                </div>`;
+
+            const value = orderInput.value.trim();
+
+            if (orders[value]) {
+
+                const order = orders[value];
+
+                resultArea.innerHTML = `
+                <div style="background:#ffffff;padding:20px;border-radius:12px;margin-top:15px;box-shadow:0 0 10px rgba(0,0,0,.1);text-align:right;">
+                    <h3>${order.customer}</h3>
+
+                    <p><strong>الحالة:</strong> ${order.status}</p>
+
+                    <div style="background:#ddd;height:20px;border-radius:50px;overflow:hidden;">
+                        <div style="width:${order.progress}%;height:100%;background:#0f5132;"></div>
+                    </div>
+
+                    <p style="margin-top:10px;">
+                        نسبة الإنجاز ${order.progress}%
+                    </p>
+                </div>
+                `;
+
             } else {
-                resultArea.innerHTML = `<p style="color:red; text-align:center;">عذراً، لم يتم العثور على طلب.</p>`;
+
+                resultArea.innerHTML = `
+                <div style="color:red;margin-top:15px;text-align:center;">
+                    لم يتم العثور على الطلب
+                </div>
+                `;
             }
+
         });
     }
 
-    // 4. نظام طلب عرض السعر (إصلاح خطأ 401)
-    const quoteBtn = document.getElementById('quoteBtn');
-    if (quoteBtn) {
-        quoteBtn.addEventListener('click', (e) => {
-            e.preventDefault(); // يمنع الذهاب لصفحة الخطأ
-            alert("تم إرسال طلب عرض السعر بنجاح، سنتواصل معك قريباً!");
+    // القائمة الجانبية
+    const menuBtn = document.querySelector('.menu-toggle');
+    const menu = document.querySelector('.nav-menu');
+
+    if (menuBtn && menu) {
+        menuBtn.addEventListener('click', function () {
+            menu.classList.toggle('active');
         });
     }
 
-    // 5. تفعيل القائمة الجانبية (الثلاث خطوط)
-    const menuToggle = document.querySelector('.menu-toggle');
-    const navMenu = document.querySelector('.nav-menu');
-    if (menuToggle && navMenu) {
-        menuToggle.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-        });
-    }
 });
