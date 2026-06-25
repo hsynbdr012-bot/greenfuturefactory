@@ -1,84 +1,132 @@
 document.addEventListener('DOMContentLoaded', function() {
 
-const orders = {
+    // إخفاء شاشة التحميل
+    const loader = document.getElementById('loader');
+    if(loader){
+        loader.style.display = 'none';
+    }
 
-"بدر": {
-customer: "بدر الصبحي",
-order: "GFF-2026",
-step: 3
-},
+    // القائمة الجوال
+    const menuBtn = document.getElementById('mobileMenuBtn');
+    const navMenu = document.getElementById('navMenu');
 
-"محمد": {
-customer: "محمد أحمد",
-order: "GFF-2027",
-step: 6
-},
+    if(menuBtn && navMenu){
+        menuBtn.addEventListener('click', function(){
+            navMenu.classList.toggle('active');
+        });
+    }
 
-"2026": {
-customer: "بدر الصبحي",
-order: "GFF-2026",
-step: 3
-}
+    // العدادات
+    const counters = document.querySelectorAll('.stat-number');
 
-};
+    counters.forEach(counter => {
 
-const btn = document.getElementById('btnSearchOrder');
-const input = document.getElementById('orderSearchInput');
+        const target = parseInt(counter.getAttribute('data-target'));
+        let count = 0;
 
-if(!btn || !input) return;
+        const updateCounter = () => {
 
-btn.addEventListener('click', function() {
+            const increment = Math.ceil(target / 100);
 
-const search = input.value.trim();
+            if(count < target){
 
-const result = orders[search];
+                count += increment;
 
-if(!result){
+                if(count > target){
+                    count = target;
+                }
 
-alert('لم يتم العثور على الطلب');
+                counter.innerText = count;
 
-return;
+                setTimeout(updateCounter, 20);
 
-}
+            }
 
-document.getElementById('trackingResultContainer').classList.remove('hidden');
+        };
 
-document.getElementById('lblCustomerName').textContent =
-result.customer;
+        updateCounter();
 
-document.getElementById('lblOrderNum').textContent =
-result.order;
+    });
 
-const progress = document.getElementById('progressLineFill');
+    // تتبع الطلب
+    const orders = {
 
-const percentages = {
-1:'14%',
-2:'28%',
-3:'42%',
-4:'57%',
-5:'71%',
-6:'85%',
-7:'100%'
-};
+        "بدر": {
+            customer: "بدر الصبحي",
+            order: "GFF-2026",
+            step: 3
+        },
 
-progress.style.width = percentages[result.step];
+        "محمد": {
+            customer: "محمد أحمد",
+            order: "GFF-2027",
+            step: 6
+        },
 
-for(let i=1;i<=7;i++){
+        "2026": {
+            customer: "بدر الصبحي",
+            order: "GFF-2026",
+            step: 3
+        }
 
-const step = document.getElementById('step'+i);
+    };
 
-if(i <= result.step){
+    const btn = document.getElementById('btnSearchOrder');
+    const input = document.getElementById('orderSearchInput');
 
-step.classList.add('active');
+    if(btn && input){
 
-}else{
+        btn.addEventListener('click', function(){
 
-step.classList.remove('active');
+            const search = input.value.trim();
 
-}
+            const result = orders[search];
 
-}
+            if(!result){
 
-});
+                alert('لم يتم العثور على الطلب');
+                return;
+
+            }
+
+            document.getElementById('trackingResultContainer').classList.remove('hidden');
+
+            document.getElementById('lblCustomerName').textContent = result.customer;
+
+            document.getElementById('lblOrderNum').textContent = result.order;
+
+            const progress = document.getElementById('progressLineFill');
+
+            const percentages = {
+                1:'14%',
+                2:'28%',
+                3:'42%',
+                4:'57%',
+                5:'71%',
+                6:'85%',
+                7:'100%'
+            };
+
+            progress.style.width = percentages[result.step];
+
+            for(let i=1;i<=7;i++){
+
+                const step = document.getElementById('step'+i);
+
+                if(step){
+
+                    if(i <= result.step){
+                        step.classList.add('active');
+                    }else{
+                        step.classList.remove('active');
+                    }
+
+                }
+
+            }
+
+        });
+
+    }
 
 });
