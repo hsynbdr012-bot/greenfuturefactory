@@ -1,107 +1,84 @@
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', function() {
 
-    // إخفاء شاشة التحميل
-    const loader = document.getElementById('loader');
-    if (loader) {
-        loader.style.display = 'none';
-    }
+const orders = {
 
-    // حركة الأرقام
-    const counters = document.querySelectorAll('.stat-number');
+"بدر": {
+customer: "بدر الصبحي",
+order: "GFF-2026",
+step: 3
+},
 
-    counters.forEach(counter => {
-        const target = parseInt(counter.getAttribute('data-target')) || 0;
-        let count = 0;
+"محمد": {
+customer: "محمد أحمد",
+order: "GFF-2027",
+step: 6
+},
 
-        const updateCounter = () => {
-            const increment = Math.ceil(target / 100);
+"2026": {
+customer: "بدر الصبحي",
+order: "GFF-2026",
+step: 3
+}
 
-            if (count < target) {
-                count += increment;
-                counter.innerText = count;
-                setTimeout(updateCounter, 20);
-            } else {
-                counter.innerText = target;
-            }
-        };
+};
 
-        updateCounter();
-    });
+const btn = document.getElementById('btnSearchOrder');
+const input = document.getElementById('orderSearchInput');
 
-    // قاعدة بيانات العملاء
-    const orders = {
-        "بدر": {
-            customer: "بدر الصبحي",
-            status: "في قسم التجميع والكبس",
-            progress: 60
-        },
+if(!btn || !input) return;
 
-        "محمد": {
-            customer: "محمد أحمد",
-            status: "جاهز للتركيب",
-            progress: 100
-        },
+btn.addEventListener('click', function() {
 
-        "2026": {
-            customer: "عميل تجريبي",
-            status: "جاري التصنيع",
-            progress: 35
-        }
-    };
+const search = input.value.trim();
 
-    // البحث
-    const trackBtn = document.getElementById('trackBtn');
-    const orderInput = document.getElementById('orderInput');
-    const resultArea = document.getElementById('result-area');
+const result = orders[search];
 
-    if (trackBtn && orderInput && resultArea) {
+if(!result){
 
-        trackBtn.addEventListener('click', function (e) {
+alert('لم يتم العثور على الطلب');
 
-            e.preventDefault();
+return;
 
-            const value = orderInput.value.trim();
+}
 
-            if (orders[value]) {
+document.getElementById('trackingResultContainer').classList.remove('hidden');
 
-                const order = orders[value];
+document.getElementById('lblCustomerName').textContent =
+result.customer;
 
-                resultArea.innerHTML = `
-                <div style="background:#ffffff;padding:20px;border-radius:12px;margin-top:15px;box-shadow:0 0 10px rgba(0,0,0,.1);text-align:right;">
-                    <h3>${order.customer}</h3>
+document.getElementById('lblOrderNum').textContent =
+result.order;
 
-                    <p><strong>الحالة:</strong> ${order.status}</p>
+const progress = document.getElementById('progressLineFill');
 
-                    <div style="background:#ddd;height:20px;border-radius:50px;overflow:hidden;">
-                        <div style="width:${order.progress}%;height:100%;background:#0f5132;"></div>
-                    </div>
+const percentages = {
+1:'14%',
+2:'28%',
+3:'42%',
+4:'57%',
+5:'71%',
+6:'85%',
+7:'100%'
+};
 
-                    <p style="margin-top:10px;">
-                        نسبة الإنجاز ${order.progress}%
-                    </p>
-                </div>
-                `;
+progress.style.width = percentages[result.step];
 
-            } else {
+for(let i=1;i<=7;i++){
 
-                resultArea.innerHTML = `
-                <div style="color:red;margin-top:15px;text-align:center;">
-                    لم يتم العثور على الطلب
-                </div>
-                `;
-            }
+const step = document.getElementById('step'+i);
 
-        });
-    }
+if(i <= result.step){
 
-    // القائمة الجانبية
-    const menuBtn = document.querySelector('.menu-toggle');
-    const menu = document.querySelector('.nav-menu');
+step.classList.add('active');
 
-    if (menuBtn && menu) {
-        menuBtn.addEventListener('click', function () {
-            menu.classList.toggle('active');
-        });
-    }
+}else{
+
+step.classList.remove('active');
+
+}
+
+}
+
+});
 
 });
