@@ -130,21 +130,3 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
 });
-/ ASyatil chradl
-const counters = document. querySelectorAll('-stat-number");
-counters. forEach counter => {
-const target = +counter. getAttribute('data-target");
-let count = 0;
-const update = () => {
-const inc = Math.ceil(target / 100);
-if(count < target) ( count += inc;
-if(count > target) count = target;
-counter. innerText = count. toLocaleString();
-setTimeout (update, 15);
-relse(
-counter. innerText = target. 
-toLocaleString();
-}
-};
-update();
-}):
