@@ -1,43 +1,71 @@
-/* أنيميشن الظهور التدريجي من الأسفل للأعلى (Fade In Up) */
+/* =========================
+   Animations
+========================= */
+
+/* Fade In Up */
 @keyframes fadeInUp {
     from {
         opacity: 0;
-        transform: translateY(40px);
+        transform: translate3d(0, 40px, 0);
     }
+
     to {
         opacity: 1;
-        transform: translateY(0);
+        transform: translate3d(0, 0, 0);
     }
 }
 
-/* أنيميشن الظهور التدريجي البسيط (Fade In) */
+/* Fade In */
 @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
 
-/* تطبيق الأكواد على الكلاسات */
+/* =========================
+   Animation Classes
+========================= */
+
 .fade-in-up {
+    opacity: 0;
     animation: fadeInUp 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+    will-change: transform, opacity;
 }
 
 .fade-in {
+    opacity: 0;
     animation: fadeIn 1s ease-in-out forwards;
+    will-change: opacity;
 }
 
-/* تأثير تحويم ناعم للكروت والأزرار الزجاجية */
+/* =========================
+   Hover Effects
+========================= */
+
 .shadow-effect {
-    transition: var(--transition);
+    transition:
+        transform var(--transition, 0.3s ease),
+        box-shadow var(--transition, 0.3s ease);
 }
+
 .shadow-effect:hover {
     transform: translateY(-5px);
     box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
 }
 
 .transparent-card {
-    transition: var(--transition);
+    transition:
+        background var(--transition, 0.3s ease),
+        border-color var(--transition, 0.3s ease),
+        transform var(--transition, 0.3s ease);
 }
+
 .transparent-card:hover {
     background: rgba(255, 255, 255, 0.05);
     border-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-4px);
 }
