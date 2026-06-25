@@ -16,6 +16,8 @@
         position: fixed; top: 70px; right: -100%; width: 100%; height: calc(100vh - 70px);
         background: rgba(13, 58, 43, 0.98); backdrop-filter: blur(15px);
         transition: var(--transition); z-index: 999;
+        overflow-y: auto;
+-webkit-overflow-scrolling: touch;
     }
     .nav-menu.active { right: 0; }
     .nav-menu ul { flex-direction: column; padding: 40px 0; text-align: center; }
