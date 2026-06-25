@@ -1,36 +1,50 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>مصنع المستقبل الأخضر للأبواب | أبواب WPC والأبواب الداخلية</title>
-
-<meta name="description" content="مصنع المستقبل الأخضر متخصص في تصنيع وتركيب أبواب WPC والأبواب الداخلية بجودة عالية منذ عام 2017.">
-
-<meta name="theme-color" content="#0d3a2b">
-
-<link rel="manifest" href="manifest.json">
-
-<link rel="icon" href="assets/images/favicon.png">
-<link rel="apple-touch-icon" href="assets/images/favicon.png">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
-
-<link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="css/animations.css">
-<link rel="stylesheet" href="css/responsive.css">
-
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-
-<meta property="og:type" content="website">
-<meta property="og:title" content="مصنع المستقبل الأخضر">
-<meta property="og:description" content="جودة، ثقة، تصنيع احترافي للأبواب.">
-<meta property="og:image" content="assets/images/og-share.jpg">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مصنع المستقبل الأخضر | أبواب WPC</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/animations.css">
 </head>
+<body>
+
+    <div id="loader" class="loader-container">
+        <div class="spinner"></div>
+    </div>
+
+    <header class="main-header">
+        <div class="header-container">
+            <div class="logo">مصنع المستقبل الأخضر</div>
+            <nav id="navMenu" class="nav-menu">
+                <ul>
+                    <li><a href="#">الرئيسية</a></li>
+                    <li><a href="#tracking">تتبع الطلب</a></li>
+                </ul>
+            </nav>
+            <div id="mobileMenuBtn" class="menu-toggle">☰</div>
+        </div>
+    </header>
+
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1 class="hero-title">جودة تدوم للمستقبل</h1>
+        </div>
+    </section>
+
+    <section id="tracking" class="section-padding">
+        <div class="tracking-search-box">
+            <input type="text" id="orderSearchInput" placeholder="أدخل رقم الطلب">
+            <button id="btnSearchOrder">بحث</button>
+        </div>
+        <div id="trackingResultContainer" class="hidden">
+            <p>اسم العميل: <span id="lblCustomerName"></span></p>
+            <div class="progress-line-background">
+                <div id="progressLineFill" class="progress-line-fill"></div>
+            </div>
+        </div>
+    </section>
+
+    <script src="./js/main.js"></script>
+</body>
+</html>
