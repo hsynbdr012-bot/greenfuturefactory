@@ -1,13 +1,15 @@
-document.addEventListener('DOMContentLoaded', () => {
-    
-    // 1. إلغاء الـ Loader فوراً وإجبار الموقع على الظهور
+// كود شامل: يشغل الموقع ويضيف البحث دون تداخل
+window.addEventListener('load', () => {
+    // 1. إخفاء شاشة التحميل الأصلية (تأكد أن ID الخاص بها هو 'loader')
     const loader = document.getElementById('loader');
     if (loader) {
-        loader.style.display = 'none';
-        loader.classList.remove('hidden');
+        loader.style.opacity = '0';
+        setTimeout(() => { loader.style.display = 'none'; }, 500);
     }
+});
 
-    // 2. تشغيل العدادات (الأرقام)
+document.addEventListener('DOMContentLoaded', () => {
+    // 2. تشغيل العدادات (الخبرة والأبواب)
     const stats = document.querySelectorAll('.stat-number');
     stats.forEach(counter => {
         const target = +counter.getAttribute('data-target');
@@ -26,33 +28,31 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // 3. نظام البحث المطور
-    const trackBtn = document.querySelector('button'); 
-    const orderInput = document.querySelector('input'); 
+    // 3. نظام البحث المدمج
+    const trackBtn = document.getElementById('trackBtn'); // تأكد من اسم ID في HTML
+    const orderInput = document.getElementById('orderInput'); // تأكد من اسم ID في HTML
     
     if (trackBtn && orderInput) {
-        trackBtn.addEventListener('click', (e) => {
-            e.preventDefault();
+        trackBtn.addEventListener('click', () => {
             const query = orderInput.value.trim();
             const orders = { "2026": { name: "بدر محمد", status: "في قسم التجميع والكبس", progress: "60%", color: "#27ae60" } };
-            const data = orders[query] || (query === "بدر محمد" ? orders["2026"] : null);
-
-            let resultDiv = document.getElementById('res-box');
+            
+            let resultDiv = document.getElementById('result-area');
             if (!resultDiv) {
                 resultDiv = document.createElement('div');
-                resultDiv.id = 'res-box';
-                resultDiv.style.marginTop = "20px";
+                resultDiv.id = 'result-area';
                 orderInput.parentNode.appendChild(resultDiv);
             }
 
+            const data = orders[query] || (query === "بدر محمد" ? orders["2026"] : null);
             if (data) {
-                resultDiv.innerHTML = `<div style="background:#fff; padding:15px; border-radius:8px; border-right:5px solid ${data.color}; box-shadow:0 2px 5px rgba(0,0,0,0.1); text-align:right;">
-                    <h4 style="margin:0;">العميل: ${data.name}</h4>
-                    <p style="margin:5px 0;">الحالة: ${data.status}</p>
-                    <div style="background:#eee; height:10px; border-radius:5px;"><div style="width:${data.progress}; background:${data.color}; height:100%;"></div></div>
+                resultDiv.innerHTML = `<div style="background:#fff; padding:15px; margin-top:10px; border-right:5px solid ${data.color};">
+                    <h4>العميل: ${data.name}</h4>
+                    <p>الحالة: ${data.status}</p>
+                    <div style="background:#eee; height:10px;"><div style="width:${data.progress}; background:${data.color}; height:100%;"></div></div>
                 </div>`;
             } else {
-                resultDiv.innerHTML = `<p style="color:red; text-align:center;">لم يتم العثور على طلب</p>`;
+                resultDiv.innerHTML = `<p style="color:red;">غير موجود</p>`;
             }
         });
     }
