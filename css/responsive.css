@@ -1,4 +1,17 @@
-/* الشاشات المتوسطة (الأيباد والتابلت) */
+/* --- الإعدادات الأساسية والمتغيرات --- */
+:root {
+    --transition: 0.3s ease;
+    --white: #ffffff;
+    --secondary-color: #0d3a2b;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* --- تنسيقات الشاشات المتوسطة (أقل من 992px) --- */
 @media (max-width: 992px) {
     .hero-title { font-size: 36px; }
     .hero-subtitle { font-size: 18px; }
@@ -9,34 +22,76 @@
     .footer-grid { grid-template-columns: 1fr; gap: 30px; }
 }
 
-/* شاشات الجوال الذكية */
+/* --- تنسيقات الجوال (أقل من 768px) --- */
 @media (max-width: 768px) {
     .header-container { padding: 15px 5%; }
+    
     .nav-menu {
-        position: fixed; top: 70px; right: -100%; width: 100%; height: calc(100vh - 70px);
-        background: rgba(13, 58, 43, 0.98); backdrop-filter: blur(15px);
-        transition: var(--transition); z-index: 999;
+        position: fixed; 
+        top: 70px; 
+        right: -100%; 
+        width: 100%; 
+        height: calc(100vh - 70px);
+        background: rgba(13, 58, 43, 0.98); 
+        backdrop-filter: blur(15px);
+        transition: var(--transition); 
+        z-index: 999;
         overflow-y: auto;
--webkit-overflow-scrolling: touch;
+        display: flex;
+        flex-direction: column;
     }
+    
     .nav-menu.active { right: 0; }
-    .nav-menu ul { flex-direction: column; padding: 40px 0; text-align: center; }
+    
+    .nav-menu ul { 
+        display: flex; 
+        flex-direction: column; 
+        padding: 40px 0; 
+        text-align: center; 
+        list-style: none; 
+    }
+    
     .nav-menu ul li { margin: 20px 0; }
-    .nav-menu ul li a { color: var(--white); font-size: 18px; }
+    
+    .nav-menu ul li a { 
+        color: var(--white); 
+        font-size: 18px; 
+        text-decoration: none; 
+    }
     
     .menu-toggle { display: block; color: var(--secondary-color); }
     .btn-call-header { display: none; }
     
     .hero-title { font-size: 28px; }
     .hero-desc { font-size: 14px; }
-    .hero-buttons a { width: 100%; margin: 8px 0; }
+    .hero-buttons a { width: 100%; margin: 8px 0; display: block; text-align: center; }
     
     .tracking-search-box { padding: 20px; }
-    .search-input-group { flex-direction: column; }
+    
+    .search-input-group { 
+        flex-direction: column; 
+        display: flex; 
+        gap: 10px;
+    }
+    
     .btn-search { padding: 15px; width: 100%; }
     
-    .steps-container { flex-direction: column; align-items: flex-start; gap: 25px; padding-right: 20px; }
-    .step-node { flex-direction: row; text-align: right; width: 100%; gap: 15px; }
+    .steps-container { 
+        display: flex; 
+        flex-direction: column; 
+        align-items: flex-start; 
+        gap: 25px; 
+        padding-right: 20px; 
+    }
+    
+    .step-node { 
+        display: flex; 
+        flex-direction: row; 
+        text-align: right; 
+        width: 100%; 
+        gap: 15px; 
+    }
+    
     .progress-line-background { display: none; }
     .step-text { margin-top: 0; font-size: 13px; }
 }
