@@ -1,23 +1,18 @@
-window.addEventListener('load', function() {
-    // 1. إخفاء الـ Loader
-    const loader = document.getElementById('loader');
-    if (loader) loader.style.display = 'none';
-
-    // 2. القائمة الجوال
-    const menuBtn = document.getElementById('mobileMenuBtn');
-    const navMenu = document.getElementById('navMenu');
-    if (menuBtn && navMenu) {
-        menuBtn.addEventListener('click', () => navMenu.classList.toggle('active'));
-    }
-
-    // 3. التتبع
-    const btn = document.getElementById('btnSearchOrder');
-    if (btn) {
-        btn.addEventListener('click', () => {
-            const container = document.getElementById('trackingResultContainer');
-            if (container) container.classList.remove('hidden');
-            const progress = document.getElementById('progressLineFill');
-            if (progress) progress.style.width = '50%';
-        });
-    }
+window.addEventListener('load', () => {
+    document.getElementById('loader').style.display = 'none';
+    
+    // تفعيل العدادات
+    const counters = document.querySelectorAll('.stat-number');
+    counters.forEach(counter => {
+        const update = () => {
+            const target = +counter.getAttribute('data-target');
+            const count = +counter.innerText.replace('%', '');
+            const inc = target / 50;
+            if(count < target) {
+                counter.innerText = Math.ceil(count + inc) + (counter.getAttribute('data-target').includes('%') ? '%' : '');
+                setTimeout(update, 40);
+            }
+        };
+        update();
+    });
 });
