@@ -3,39 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مصنع المستقبل الأخضر</title>
+    <title>مصنع المستقبل الأخضر | GFF</title>
     <style>
-        body { font-family: 'Arial', sans-serif; margin: 0; background-color: #f4f4f4; text-align: center; }
-        .hero { background: #0d3a2b; color: white; padding: 50px 20px; }
-        .tracking-box { background: white; padding: 30px; margin: 20px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-        input { width: 80%; padding: 12px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 5px; }
-        button { background: #d4af37; color: black; border: none; padding: 12px 30px; border-radius: 5px; font-weight: bold; cursor: pointer; }
-        #status-result { margin-top: 20px; font-size: 18px; color: #0d3a2b; font-weight: bold; }
+        :root { --green: #0d3a2b; --gold: #d4af37; --white: #ffffff; }
+        body { font-family: 'Arial', sans-serif; margin: 0; background-color: #f4f4f4; }
+        header { background: var(--green); color: white; padding: 20px; text-align: center; }
+        .hero { padding: 40px 20px; background: white; text-align: center; }
+        .stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; padding: 20px; background: #333; color: white; }
+        .service-box { padding: 20px; background: white; margin: 10px; border-radius: 10px; border: 1px solid #ddd; }
+        .tracking-section { background: white; padding: 30px; margin: 20px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        input { width: 90%; padding: 12px; margin: 10px 0; border: 2px solid var(--green); border-radius: 5px; }
+        button { background: var(--gold); border: none; padding: 12px 30px; border-radius: 5px; font-weight: bold; width: 100%; cursor: pointer; }
+        .steps { display: flex; justify-content: space-between; margin-top: 20px; font-size: 10px; }
+        .step { color: #888; }
+        .step.active { color: var(--green); font-weight: bold; }
     </style>
 </head>
 <body>
 
+    <header><h1>مصنع المستقبل الأخضر</h1></header>
+
     <section class="hero">
-        <h1>مصنع المستقبل الأخضر</h1>
-        <p>جودة تدوم للمستقبل</p>
+        <h2>جودة تدوم للمستقبل</h2>
+        <p>أبواب WPC بلمسة عصرية</p>
     </section>
 
-    <section class="tracking-box">
-        <h2>تتبع طلبك</h2>
-        <input type="text" id="order-id" placeholder="أدخل رقم الطلب...">
-        <button onclick="checkOrder()">بحث</button>
-        <div id="status-result"></div>
+    <div class="stats">
+        <div><h3>9</h3>سنوات خبرة</div>
+        <div><h3>+300</h3>مشروع</div>
+    </div>
+
+    <section class="tracking-section">
+        <h3>تتبع طلبك</h3>
+        <input type="text" id="orderInput" placeholder="أدخل رقم الطلب">
+        <button onclick="trackOrder()">بحث</button>
+        <div id="result" style="margin-top:20px; display:none;">
+            <strong>الحالة:</strong> جاري التصنيع
+            <div class="steps">
+                <div class="step active">استلام</div>
+                <div class="step active">تصنيع</div>
+                <div class="step">تركيب</div>
+                <div class="step">تسليم</div>
+            </div>
+        </div>
     </section>
 
     <script>
-        function checkOrder() {
-            const id = document.getElementById('order-id').value;
-            const res = document.getElementById('status-result');
-            if(id === "123") {
-                res.innerHTML = "حالة الطلب: في مرحلة التصنيع ✅";
-            } else {
-                res.innerHTML = "عذراً، رقم الطلب غير صحيح.";
-            }
+        function trackOrder() {
+            const input = document.getElementById('orderInput').value;
+            if(input) { document.getElementById('result').style.display = 'block'; }
+            else { alert('الرجاء إدخال رقم الطلب'); }
         }
     </script>
 </body>
