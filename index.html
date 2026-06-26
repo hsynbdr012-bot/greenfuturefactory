@@ -5,29 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>مصنع المستقبل الأخضر | GFF</title>
     <style>
-        :root { --green: #0d3a2b; --gold: #d4af37; --black: #1a1a1a; --white: #ffffff; }
-        * { box-sizing: border-box; }
-        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; background-color: #f4f4f4; }
+        :root { --green: #0d3a2b; --gold: #d4af37; --white: #ffffff; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; background-color: #f9f9f9; position: relative; }
         
-        /* الهيدر */
-        .header { background: var(--green); color: var(--white); padding: 15px; text-align: center; font-weight: bold; font-size: 1.4rem; border-bottom: 4px solid var(--gold); }
+        /* خلفية الشعار الباهتة */
+        body::before { content: ""; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 70%; height: 70%; background-image: url('https://i.imgur.com/v8tT4gS.png'); background-repeat: no-repeat; background-position: center; background-size: contain; opacity: 0.05; z-index: -1; }
+
+        .header { background: var(--green); color: white; padding: 20px; text-align: center; font-size: 1.5rem; font-weight: bold; border-bottom: 5px solid var(--gold); }
+        .hero { padding: 40px 20px; text-align: center; }
+        .stats { display: flex; justify-content: space-around; padding: 20px; }
+        .stat-box { background: var(--green); color: white; padding: 20px; border-radius: 12px; width: 40%; text-align: center; }
+        .stat-box h3 { color: var(--gold); margin: 0; font-size: 1.6rem; }
         
-        /* قسم الترحيب */
-        .hero { background: var(--white); padding: 40px 20px; text-align: center; }
-        .hero h1 { color: var(--black); margin: 0; }
-        
-        /* العدادات */
-        .stats-container { display: flex; justify-content: space-around; padding: 20px; }
-        .stat-box { background: var(--green); color: var(--white); padding: 20px; border-radius: 10px; width: 45%; text-align: center; }
-        .stat-box h3 { color: var(--gold); margin: 0; font-size: 1.8rem; }
-        
-        /* التتبع */
-        .tracking-card { background: var(--white); margin: 20px; padding: 25px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); text-align: center; }
-        input { width: 100%; padding: 15px; margin: 15px 0; border: 2px solid var(--green); border-radius: 8px; font-size: 1rem; }
-        button { background: var(--gold); color: var(--black); border: none; padding: 15px 0; width: 100%; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 1.1rem; }
-        
-        /* النتيجة */
-        #status-area { margin-top: 20px; padding: 15px; border-radius: 8px; background: #e8f5e9; color: var(--green); display: none; font-weight: bold; }
+        .card { background: white; margin: 20px; padding: 30px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); text-align: center; }
+        input { width: 90%; padding: 15px; margin: 10px 0; border: 2px solid var(--green); border-radius: 8px; }
+        button { background: var(--gold); color: black; border: none; padding: 15px 40px; border-radius: 8px; font-weight: bold; width: 90%; cursor: pointer; }
+
+        /* زر الواتساب العائم */
+        .whatsapp-float { position: fixed; bottom: 20px; right: 20px; background: #25d366; color: white; padding: 15px 20px; border-radius: 50px; text-decoration: none; font-weight: bold; box-shadow: 0 4px 10px rgba(0,0,0,0.2); z-index: 100; }
     </style>
 </head>
 <body>
@@ -39,28 +34,26 @@
         <p>أبواب WPC بلمسة عصرية</p>
     </section>
 
-    <div class="stats-container">
+    <div class="stats">
         <div class="stat-box"><h3>9+</h3><p>سنوات خبرة</p></div>
         <div class="stat-box"><h3>300+</h3><p>مشروع</p></div>
     </div>
 
-    <div class="tracking-card">
+    <div class="card">
         <h3>تتبع طلبك</h3>
         <input type="text" id="orderInput" placeholder="أدخل رقم الطلب">
         <button onclick="trackOrder()">بحث عن الطلب</button>
-        <div id="status-area"></div>
+        <div id="result" style="margin-top:20px;"></div>
     </div>
+
+    <a href="https://wa.me/966555665136" class="whatsapp-float">تواصل معنا واتساب</a>
 
     <script>
         function trackOrder() {
-            const input = document.getElementById('orderInput').value;
-            const statusArea = document.getElementById('status-area');
-            if(input.trim() !== "") {
-                statusArea.style.display = 'block';
-                statusArea.innerHTML = "حالة الطلب: قيد المعالجة (رقم: " + input + ")";
-            } else {
-                alert("يرجى إدخال رقم الطلب بشكل صحيح");
-            }
+            const val = document.getElementById('orderInput').value;
+            const res = document.getElementById('result');
+            if(val) { res.innerHTML = "جاري البحث عن طلب رقم: " + val + "..."; }
+            else { alert("يرجى إدخال رقم الطلب"); }
         }
     </script>
 </body>
