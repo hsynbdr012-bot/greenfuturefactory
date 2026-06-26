@@ -6,22 +6,27 @@
     <title>مصنع المستقبل الأخضر | GFF</title>
     <style>
         :root { --green: #0d3a2b; --gold: #d4af37; --white: #ffffff; }
-        body { font-family: 'Arial', sans-serif; margin: 0; background-color: #f4f4f4; }
-        header { background: var(--green); color: white; padding: 20px; text-align: center; }
-        .hero { padding: 40px 20px; background: white; text-align: center; }
-        .stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; padding: 20px; background: #333; color: white; }
-        .service-box { padding: 20px; background: white; margin: 10px; border-radius: 10px; border: 1px solid #ddd; }
-        .tracking-section { background: white; padding: 30px; margin: 20px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-        input { width: 90%; padding: 12px; margin: 10px 0; border: 2px solid var(--green); border-radius: 5px; }
+        body { font-family: sans-serif; margin: 0; background: #f9f9f9; }
+        
+        /* الهيدر */
+        header { background: var(--green); color: white; padding: 15px; text-align: center; font-size: 20px; }
+        
+        /* قسم الهيرو */
+        .hero { padding: 40px 20px; text-align: center; }
+        
+        /* العدادات (المشكلة كانت هنا، جعلناها تظهر بجانب بعضها) */
+        .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 20px; background: #333; color: white; }
+        .stat-item { text-align: center; padding: 10px; }
+        
+        /* مربع التتبع */
+        .tracking-section { background: white; padding: 25px; margin: 20px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        input { width: 90%; padding: 12px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; }
         button { background: var(--gold); border: none; padding: 12px 30px; border-radius: 5px; font-weight: bold; width: 100%; cursor: pointer; }
-        .steps { display: flex; justify-content: space-between; margin-top: 20px; font-size: 10px; }
-        .step { color: #888; }
-        .step.active { color: var(--green); font-weight: bold; }
     </style>
 </head>
 <body>
 
-    <header><h1>مصنع المستقبل الأخضر</h1></header>
+    <header>مصنع المستقبل الأخضر</header>
 
     <section class="hero">
         <h2>جودة تدوم للمستقبل</h2>
@@ -29,30 +34,21 @@
     </section>
 
     <div class="stats">
-        <div><h3>9</h3>سنوات خبرة</div>
-        <div><h3>+300</h3>مشروع</div>
+        <div class="stat-item"><h3>9</h3>سنوات خبرة</div>
+        <div class="stat-item"><h3>+300</h3>مشروع</div>
     </div>
 
     <section class="tracking-section">
         <h3>تتبع طلبك</h3>
         <input type="text" id="orderInput" placeholder="أدخل رقم الطلب">
         <button onclick="trackOrder()">بحث</button>
-        <div id="result" style="margin-top:20px; display:none;">
-            <strong>الحالة:</strong> جاري التصنيع
-            <div class="steps">
-                <div class="step active">استلام</div>
-                <div class="step active">تصنيع</div>
-                <div class="step">تركيب</div>
-                <div class="step">تسليم</div>
-            </div>
-        </div>
     </section>
 
     <script>
         function trackOrder() {
             const input = document.getElementById('orderInput').value;
-            if(input) { document.getElementById('result').style.display = 'block'; }
-            else { alert('الرجاء إدخال رقم الطلب'); }
+            if(input) { alert('جاري البحث عن الطلب: ' + input); }
+            else { alert('يرجى إدخال رقم الطلب'); }
         }
     </script>
 </body>
