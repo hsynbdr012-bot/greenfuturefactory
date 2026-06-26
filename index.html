@@ -3,67 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مصنع المستقبل الأخضر | GFF</title>
+    <title>GFF | نظام تتبع الطلبات</title>
     <style>
         :root { --green: #0d3a2b; --gold: #d4af37; }
-        body { font-family: sans-serif; background: #f4f4f4; margin: 0; padding-bottom: 80px; }
+        body { font-family: sans-serif; background: #f9f9f9; margin: 0; padding-bottom: 80px; }
         
-        .header { background: white; padding: 25px; text-align: center; border-bottom: 4px solid var(--gold); }
-        .header h1 { color: var(--green); margin: 0; font-size: 1.6rem; }
+        .header { background: white; padding: 20px; text-align: center; border-bottom: 3px solid var(--gold); }
+        .header h1 { color: var(--green); margin: 0; font-size: 1.5rem; }
+        .header p { color: var(--gold); font-weight: bold; font-size: 0.9rem; margin: 5px 0 0; }
         
         .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 15px; }
         .stat-card { background: var(--green); color: white; padding: 15px; border-radius: 15px; text-align: center; }
-        .stat-card h2 { color: var(--gold); margin: 5px 0; font-size: 1.4rem; }
-        
-        .track-box { background: white; margin: 15px; padding: 25px; border-radius: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .stat-card h2 { color: var(--gold); margin: 5px 0; font-size: 1.3rem; }
+        .stat-card p { margin: 0; font-size: 0.75rem; }
+
+        .track-box { background: white; margin: 15px; padding: 25px; border-radius: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        .track-box h3 { color: var(--green); margin-top: 0; }
         input { width: 100%; padding: 15px; margin: 10px 0; border: 2px solid #eee; border-radius: 12px; box-sizing: border-box; }
         button { width: 100%; padding: 15px; background: var(--gold); border: none; border-radius: 12px; font-weight: bold; cursor: pointer; }
         
-        .wa-btn { position: fixed; bottom: 20px; right: 20px; background: #25d366; color: white; padding: 15px; border-radius: 50%; font-size: 24px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); z-index: 1000; }
+        /* أيقونة واتساب فعلية */
+        .wa-btn { position: fixed; bottom: 20px; right: 20px; z-index: 1000; }
+        .wa-btn img { width: 60px; height: 60px; }
     </style>
 </head>
 <body>
 
-    <div class="header"><h1>مصنع المستقبل الأخضر</h1></div>
+    <div class="header">
+        <h1>مصنع المستقبل الأخضر</h1>
+        <p>GREEN FUTURE FACTORY</p>
+    </div>
 
     <div class="stats-grid">
-        <div class="stat-card">🚪<h2 id="count1">0</h2><p>باب تم إنتاجه</p></div>
-        <div class="stat-card">👥<h2 id="count2">0</h2><p>عميل تم خدمته</p></div>
-        <div class="stat-card" style="grid-column: span 2;">🏢<h2 id="count3">0</h2><p>شركة تطوير عقاري</p></div>
+        <div class="stat-card">🚪<h2 id="c1">0</h2><p>باب تم إنتاجه</p></div>
+        <div class="stat-card">👥<h2 id="c2">0</h2><p>عميل تم خدمته</p></div>
+        <div class="stat-card">🏢<h2 id="c3">0</h2><p>شركة تطوير عقاري</p></div>
+        <div class="stat-card">⏳<h2 id="c4">0</h2><p>سنوات خبرة</p></div>
     </div>
 
     <div class="track-box">
-        <h3>نظام تتبع الطلبات</h3>
-        <input type="text" id="nameInput" placeholder="أدخل اسم العميل...">
-        <button onclick="track()">بحث عن الطلب</button>
+        <h3>نظام تتبع حالة الطلب الفوري</h3>
+        <p style="font-size: 0.9rem; color: #666;">أدخل رقم الطلب أو اسم العميل لمتابعة خط الإنتاج والتركيب الخاص بك فوراً:</p>
+        <input type="text" id="nameInput" placeholder="أدخل الاسم أو الرقم...">
+        <button onclick="track()">بحث عن الحالة</button>
         <div id="res" style="margin-top:20px;"></div>
     </div>
 
-    <a href="https://wa.me/966555665136" class="wa-btn">💬</a>
+    <a href="https://wa.me/966555665136" class="wa-btn">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+    </a>
 
     <script>
-        // العدادات المتحركة
-        function animateValue(id, start, end, duration) {
-            let range = end - start;
-            let current = start;
-            let stepTime = Math.abs(Math.floor(duration / range));
+        // العدادات
+        function startCount(id, end, duration) {
+            let current = 0;
+            let step = Math.floor(duration / end);
             let timer = setInterval(() => {
-                current += 1;
+                current += Math.ceil(end/100);
+                if(current > end) current = end;
                 document.getElementById(id).innerText = current + "+";
                 if (current == end) clearInterval(timer);
-            }, stepTime);
+            }, 10);
         }
-        animateValue("count1", 0, 15000, 2000);
-        animateValue("count2", 0, 1300, 2000);
-        animateValue("count3", 0, 40, 2000);
+        startCount("c1", 15000, 2000); startCount("c2", 1784, 2000); 
+        startCount("c3", 267, 2000); startCount("c4", 7, 2000);
 
-        // التتبع
-        const db = { "بدر": { prog: 80, stat: "🚚 جاري الشحن" }, "أحمد": { prog: 40, stat: "🛠️ تصنيع" } };
+        // قاعدة بيانات العملاء - سهلة التعديل
+        const db = {
+            "بدر": { prog: 80, stat: "🚚 جاري الشحن" },
+            "أحمد": { prog: 45, stat: "🛠️ مرحلة التصنيع" }
+        };
+
         function track() {
             let name = document.getElementById('nameInput').value.trim();
             if(db[name]) {
-                document.getElementById('res').innerHTML = `<strong>${db[name].stat}</strong><div style="height:10px; background:#eee; border-radius:5px; margin-top:10px;"><div style="height:100%; width:${db[name].prog}%; background:var(--gold); border-radius:5px;"></div></div>`;
-            } else { alert("اسم العميل غير موجود"); }
+                document.getElementById('res').innerHTML = `<strong>الحالة: ${db[name].stat}</strong><div style="height:12px; background:#eee; border-radius:6px; margin-top:10px;"><div style="height:100%; width:${db[name].prog}%; background:var(--gold); border-radius:6px;"></div></div>`;
+            } else { alert("عذراً، العميل غير مسجل."); }
         }
     </script>
 </body>
