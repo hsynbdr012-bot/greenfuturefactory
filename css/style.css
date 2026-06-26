@@ -1,7 +1,31 @@
-body { font-family: 'Cairo', sans-serif; margin: 0; background: #fff; }
-.header { display: flex; justify-content: space-between; padding: 20px; border-bottom: 2px solid #0d3a2b; }
-.hero { text-align: center; padding: 40px; background: #f9f9f9; }
-.hero-image { width: 100%; height: 300px; background: #ddd; margin-bottom: 20px; } /* هنا تضع صورتك */
-.stats { display: flex; justify-content: space-around; background: #0d3a2b; color: white; padding: 30px; }
-.grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; padding: 40px; }
-.card { border: 1px solid #ddd; padding: 40px; text-align: center; border-radius: 10px; }
+:root {
+    --primary-green: #0d3a2b;
+    --gold: #d4af37;
+    --black: #1a1a1a;
+    --white: #ffffff;
+}
+
+body { font-family: 'Cairo', sans-serif; margin: 0; background: var(--black); color: var(--white); }
+
+.main-header { 
+    display: flex; justify-content: space-between; align-items: center; 
+    padding: 20px 5%; background: rgba(0,0,0,0.9); border-bottom: 2px solid var(--gold);
+}
+
+.btn-gold { 
+    background: var(--gold); color: var(--black); padding: 10px 20px; 
+    border-radius: 5px; font-weight: bold; text-decoration: none; 
+}
+
+.hero { 
+    height: 80vh; background: linear-gradient(rgba(13,58,43,0.8), rgba(0,0,0,0.9)), url('door-bg.jpg');
+    background-size: cover; display: flex; align-items: center; justify-content: center; text-align: center;
+}
+
+.hero h1 { font-size: 3.5rem; color: var(--gold); margin-bottom: 10px; }
+.btn-hero { 
+    display: inline-block; margin-top: 20px; padding: 15px 40px; 
+    background: transparent; border: 2px solid var(--gold); color: var(--gold); 
+    text-decoration: none; transition: 0.3s;
+}
+.btn-hero:hover { background: var(--gold); color: var(--black); }
