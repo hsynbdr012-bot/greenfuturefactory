@@ -6,23 +6,33 @@
     <title>مصنع المستقبل الأخضر | GFF</title>
     <style>
         :root { --green: #0d3a2b; --gold: #d4af37; --white: #ffffff; }
-        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; background-color: #f9f9f9; position: relative; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; background-color: #f9f9f9; padding-bottom: 80px; } /* مساحة إضافية بالأسفل */
         
-        /* خلفية الشعار الباهتة */
-        body::before { content: ""; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 70%; height: 70%; background-image: url('https://i.imgur.com/v8tT4gS.png'); background-repeat: no-repeat; background-position: center; background-size: contain; opacity: 0.05; z-index: -1; }
-
-        .header { background: var(--green); color: white; padding: 20px; text-align: center; font-size: 1.5rem; font-weight: bold; border-bottom: 5px solid var(--gold); }
-        .hero { padding: 40px 20px; text-align: center; }
-        .stats { display: flex; justify-content: space-around; padding: 20px; }
-        .stat-box { background: var(--green); color: white; padding: 20px; border-radius: 12px; width: 40%; text-align: center; }
-        .stat-box h3 { color: var(--gold); margin: 0; font-size: 1.6rem; }
+        .header { background: var(--green); color: white; padding: 20px; text-align: center; font-size: 1.4rem; font-weight: bold; border-bottom: 4px solid var(--gold); }
+        .hero { padding: 30px 20px; text-align: center; }
         
-        .card { background: white; margin: 20px; padding: 30px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); text-align: center; }
-        input { width: 90%; padding: 15px; margin: 10px 0; border: 2px solid var(--green); border-radius: 8px; }
-        button { background: var(--gold); color: black; border: none; padding: 15px 40px; border-radius: 8px; font-weight: bold; width: 90%; cursor: pointer; }
+        .stats { display: flex; justify-content: space-around; padding: 10px 20px; }
+        .stat-box { background: var(--green); color: white; padding: 15px; border-radius: 12px; width: 45%; text-align: center; }
+        .stat-box h3 { color: var(--gold); margin: 0; font-size: 1.5rem; }
+        
+        .card { background: white; margin: 20px; padding: 20px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); text-align: center; }
+        input { width: 100%; padding: 12px; margin: 10px 0; border: 2px solid var(--green); border-radius: 8px; box-sizing: border-box; }
+        button { background: var(--gold); color: black; border: none; padding: 12px; width: 100%; border-radius: 8px; font-weight: bold; cursor: pointer; }
 
-        /* زر الواتساب العائم */
-        .whatsapp-float { position: fixed; bottom: 20px; right: 20px; background: #25d366; color: white; padding: 15px 20px; border-radius: 50px; text-decoration: none; font-weight: bold; box-shadow: 0 4px 10px rgba(0,0,0,0.2); z-index: 100; }
+        /* تعديل زر الواتساب ليكون في زاوية آمنة ولا يغطي المحتوى */
+        .whatsapp-float { 
+            position: fixed; 
+            bottom: 20px; 
+            left: 20px; /* نقلناه لليسار ليبقى بعيداً عن أزرار البحث */
+            background: #25d366; 
+            color: white; 
+            padding: 10px 15px; 
+            border-radius: 50px; 
+            text-decoration: none; 
+            font-size: 0.9rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3); 
+            z-index: 1000; 
+        }
     </style>
 </head>
 <body>
@@ -43,16 +53,16 @@
         <h3>تتبع طلبك</h3>
         <input type="text" id="orderInput" placeholder="أدخل رقم الطلب">
         <button onclick="trackOrder()">بحث عن الطلب</button>
-        <div id="result" style="margin-top:20px;"></div>
+        <div id="result" style="margin-top:20px; color: var(--green); font-weight: bold;"></div>
     </div>
 
-    <a href="https://wa.me/966555665136" class="whatsapp-float">تواصل معنا واتساب</a>
+    <a href="https://wa.me/966555665136" class="whatsapp-float">واتساب 💬</a>
 
     <script>
         function trackOrder() {
             const val = document.getElementById('orderInput').value;
             const res = document.getElementById('result');
-            if(val) { res.innerHTML = "جاري البحث عن طلب رقم: " + val + "..."; }
+            if(val) { res.innerHTML = "جاري البحث عن طلب رقم: " + val; }
             else { alert("يرجى إدخال رقم الطلب"); }
         }
     </script>
