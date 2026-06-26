@@ -6,71 +6,62 @@
     <title>GFF | نظام تتبع الطلبات</title>
     <style>
         :root { --green: #0d3a2b; --gold: #d4af37; }
-        body { font-family: sans-serif; background: #f9f9f9; margin: 0; padding-bottom: 80px; }
+        body { font-family: sans-serif; background: #f9f9f9; margin: 0; padding-bottom: 50px; }
         
         .header { background: white; padding: 20px; text-align: center; border-bottom: 3px solid var(--gold); }
         .header h1 { color: var(--green); margin: 0; font-size: 1.4rem; }
-        .header p { color: var(--gold); font-weight: bold; font-size: 0.8rem; margin: 5px 0 0; }
         
         .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 15px; }
         .stat-card { background: var(--green); color: white; padding: 12px; border-radius: 12px; text-align: center; }
-        .stat-card h2 { color: var(--gold); margin: 3px 0; font-size: 1.1rem; }
-        .stat-card p { margin: 0; font-size: 0.7rem; }
+        .stat-card h2 { color: var(--gold); font-size: 1.1rem; margin: 3px 0; }
+        .stat-card p { font-size: 0.7rem; margin: 0; }
 
         .track-box { background: white; margin: 15px; padding: 20px; border-radius: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
-        .track-box h3 { color: var(--green); margin-top: 0; font-size: 1.1rem; }
-        
-        /* ضبط حقل الإدخال ليمنع التكبير */
         input { width: 100%; padding: 15px; margin: 10px 0; border: 2px solid #eee; border-radius: 12px; box-sizing: border-box; font-size: 16px; }
         button { width: 100%; padding: 15px; background: var(--gold); border: none; border-radius: 12px; font-weight: bold; cursor: pointer; color: black; }
         
-        .wa-btn { position: fixed; bottom: 20px; right: 20px; z-index: 1000; }
-        .wa-btn img { width: 55px; height: 55px; }
+        /* تصميم شريط المراحل الجديد */
+        .progress-line { display: flex; justify-content: space-between; margin-top: 25px; position: relative; padding: 0 10px; }
+        .step { text-align: center; font-size: 9px; color: #ccc; z-index: 1; }
+        .step.active { color: var(--green); font-weight: bold; }
+        .circle { width: 15px; height: 15px; background: #ccc; border-radius: 50%; margin-bottom: 5px; }
+        .circle.active { background: var(--gold); box-shadow: 0 0 10px var(--gold); }
     </style>
 </head>
 <body>
 
-    <div class="header">
-        <h1>مصنع المستقبل الأخضر</h1>
-        <p>GREEN FUTURE FACTORY</p>
-    </div>
+    <div class="header"><h1>مصنع المستقبل الأخضر</h1></div>
 
     <div class="stats-grid">
         <div class="stat-card">🚪<h2 id="c1">0</h2><p>باب تم إنتاجه</p></div>
         <div class="stat-card">👥<h2 id="c2">0</h2><p>عميل تم خدمته</p></div>
-        <div class="stat-card">🏢<h2 id="c3">0</h2><p>شركات تطوير عقاري</p></div>
+        <div class="stat-card">🏢<h2 id="c3">0</h2><p>شركات تطوير</p></div>
         <div class="stat-card">⏳<h2 id="c4">0</h2><p>سنوات خبرة</p></div>
     </div>
 
     <div class="track-box">
         <h3>نظام تتبع حالة الطلب الفوري</h3>
-        <p style="font-size: 0.8rem; color: #666;">أدخل رقم الطلب أو اسم العميل لمتابعة خط الإنتاج والتركيب الخاص بك فوراً:</p>
         <input type="text" id="nameInput" placeholder="أدخل الاسم أو الرقم...">
         <button onclick="track()">بحث عن الحالة</button>
         <div id="res" style="margin-top:20px;"></div>
     </div>
 
-    <a href="https://wa.me/966555665136" class="wa-btn">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
-    </a>
-
     <script>
-        // العدادات
+        // عدادات بسرعة متوسطة (تم زيادة التوقيت لتكون هادئة)
         function startCount(id, end, duration) {
             let current = 0;
+            let stepTime = duration / end;
             let timer = setInterval(() => {
-                current += Math.ceil(end/100);
-                if(current > end) current = end;
-                document.getElementById(id).innerText = current + "+";
-                if (current == end) clearInterval(timer);
-            }, 20);
+                current += 1;
+                document.getElementById(id).innerText = current + (id === 'c4' ? "" : "+");
+                if (current >= end) clearInterval(timer);
+            }, 30); // زيادة الرقم هنا تزيد من هدوء الحركة
         }
-        startCount("c1", 15000, 2000); startCount("c2", 1784, 2000); 
-        startCount("c3", 267, 2000); startCount("c4", 7, 2000);
+        startCount("c1", 15000, 3000); startCount("c2", 1784, 3000); 
+        startCount("c3", 267, 3000); startCount("c4", 7, 3000);
 
-        // قاعدة البيانات (أضف عملاءك هنا)
         const db = {
-            "بدر": { step: 3, stat: "🛠️ مرحلة التصنيع" },
+            "بدر": { step: 4, stat: "🛠️ مرحلة التصنيع" },
             "أحمد": { step: 2, stat: "📏 مراجعة المقاسات" }
         };
 
@@ -79,10 +70,11 @@
             if(db[name]) {
                 const stages = ["استلام", "مقاسات", "مراجعة", "تصنيع", "تغليف", "شحن", "تركيب", "تسليم"];
                 let currentStep = db[name].step;
-                let html = `<strong>الحالة: ${db[name].stat}</strong><div style="display:flex; justify-content:space-between; margin-top:15px; font-size:9px;">`;
+                let html = `<strong>الحالة: ${db[name].stat}</strong><div class="progress-line">`;
+                
                 stages.forEach((s, index) => {
-                    let color = index < currentStep ? "var(--gold)" : "#ccc";
-                    html += `<div style="text-align:center; color:${color}; font-weight:bold;">●<br>${s}</div>`;
+                    let activeClass = index < currentStep ? "active" : "";
+                    html += `<div class="step ${activeClass}"><div class="circle ${activeClass}"></div>${s}</div>`;
                 });
                 document.getElementById('res').innerHTML = html + "</div>";
             } else { alert("عذراً، العميل غير مسجل."); }
