@@ -2,57 +2,81 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GFF | نظام تتبع الطلبات الذكي</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>مصنع المستقبل الأخضر | GFF</title>
     <style>
-        :root { --green: #0d3a2b; --gold: #d4af37; --white: #ffffff; }
-        body { font-family: 'Segoe UI', sans-serif; background-color: #f8f9fa; margin: 0; padding: 20px; }
-        .container { max-width: 500px; margin: auto; background: var(--white); padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
-        h2 { color: var(--green); text-align: center; margin-bottom: 25px; }
-        input { width: 100%; padding: 15px; margin-bottom: 15px; border: 2px solid #eee; border-radius: 12px; font-size: 16px; box-sizing: border-box; }
-        button { width: 100%; padding: 15px; background: var(--gold); border: none; border-radius: 12px; font-weight: bold; font-size: 1.1rem; cursor: pointer; transition: 0.3s; }
+        :root { --green: #0d3a2b; --gold: #d4af37; --bg: #f4f4f4; }
+        body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg); margin: 0; padding-bottom: 80px; }
         
-        /* شريط التتبع الاحترافي */
-        .progress-container { margin-top: 30px; display: none; }
-        .progress-bg { height: 12px; background: #eee; border-radius: 10px; overflow: hidden; }
-        .progress-fill { height: 100%; background: var(--gold); width: 0%; transition: 1s; }
-        .status-text { margin-top: 15px; font-weight: bold; color: var(--green); text-align: center; font-size: 1.2rem; }
+        /* الشعار والترويسة */
+        .header-section { background: white; padding: 20px; text-align: center; border-bottom: 3px solid var(--gold); }
+        .header-section img { width: 80%; max-width: 250px; }
+
+        /* العدادات */
+        .stats-container { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 15px; }
+        .stat-card { background: var(--green); color: white; padding: 15px; border-radius: 12px; text-align: center; }
+        .stat-card h2 { color: var(--gold); margin: 0; font-size: 1.5rem; }
+        .stat-card p { margin: 5px 0 0; font-size: 0.8rem; opacity: 0.9; }
+
+        /* منطقة التتبع */
+        .tracking-card { background: white; margin: 15px; padding: 25px; border-radius: 20px; box-shadow: 0 5px 20px rgba(0,0,0,0.08); text-align: center; }
+        input { width: 100%; padding: 15px; margin: 10px 0; border: 2px solid #ddd; border-radius: 12px; font-size: 16px; box-sizing: border-box; outline: none; }
+        button { width: 100%; padding: 15px; background: var(--gold); border: none; border-radius: 12px; font-weight: bold; font-size: 1.1rem; color: #000; cursor: pointer; }
+        
+        /* شريط التتبع */
+        .progress-box { margin-top: 30px; display: none; }
+        .progress-bar { height: 15px; background: #eee; border-radius: 10px; overflow: hidden; margin: 10px 0; }
+        .fill { height: 100%; background: var(--green); width: 0%; transition: 1s; }
+        
+        /* زر الواتساب */
+        .float-wa { position: fixed; bottom: 20px; right: 20px; background: #25d366; color: white; padding: 15px; border-radius: 50%; box-shadow: 0 4px 10px rgba(0,0,0,0.3); z-index: 1000; font-size: 24px; }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <h2>تتبع طلبي الفوري</h2>
-    <input type="text" id="nameInput" placeholder="أدخل اسم العميل...">
-    <button onclick="trackOrder()">بحث عن الطلب</button>
-
-    <div id="progressBox" class="progress-container">
-        <div class="status-text" id="statusLabel"></div>
-        <div class="progress-bg"><div id="progressBar" class="progress-fill"></div></div>
-        <p id="percentText" style="text-align: center; color: #666;"></p>
+    <div class="header-section">
+        <img src="https://i.imgur.com/5Jz8QeT.png" alt="GFF Logo">
     </div>
-</div>
 
-<script>
-    // قاعدة بيانات تجريبية (أضف أي عميل هنا)
-    const clients = {
-        "بدر": { name: "بدر العتيبي", progress: 80, status: "جاري الشحن 🚚" },
-        "أحمد": { name: "أحمد محمد", progress: 30, status: "مرحلة التصنيع 🛠️" },
-        "سارة": { name: "سارة خالد", progress: 100, status: "تم التسليم بنجاح ✅" }
-    };
+    <div class="stats-container">
+        <div class="stat-card"><h2>15,000+</h2><p>باب تم إنتاجه</p></div>
+        <div class="stat-card"><h2>1,300+</h2><p>عميل تم خدمته</p></div>
+        <div class="stat-card" style="grid-column: span 2;"><h2>40+</h2><p>شركة تطوير عقاري</p></div>
+    </div>
 
-    function trackOrder() {
-        const name = document.getElementById('nameInput').value.trim();
-        const box = document.getElementById('progressBox');
-        if(clients[name]) {
-            box.style.display = 'block';
-            document.getElementById('statusLabel').innerText = clients[name].status;
-            document.getElementById('progressBar').style.width = clients[name].progress + '%';
-            document.getElementById('percentText').innerText = "نسبة الجاهزية: " + clients[name].progress + "%";
-        } else {
-            alert("عذراً، الاسم غير مسجل في النظام.");
+    <div class="tracking-card">
+        <h3 style="color: var(--green);">نظام تتبع الطلبات</h3>
+        <input type="text" id="nameInput" placeholder="أدخل اسم العميل...">
+        <button onclick="track()">بحث عن الطلب</button>
+
+        <div id="progressBox" class="progress-box">
+            <p id="statusLabel" style="font-weight: bold;"></p>
+            <div class="progress-bar"><div id="fill" class="fill"></div></div>
+            <p id="percent" style="font-size: 0.9rem; color: #666;"></p>
+        </div>
+    </div>
+
+    <a href="https://wa.me/966555665136" class="float-wa">💬</a>
+
+    <script>
+        const db = {
+            "بدر": { prog: 80, stat: "🚚 جاري الشحن" },
+            "أحمد": { prog: 40, stat: "🛠️ مرحلة التصنيع" },
+            "سارة": { prog: 100, stat: "✅ تم التسليم" }
+        };
+
+        function track() {
+            const name = document.getElementById('nameInput').value.trim();
+            const box = document.getElementById('progressBox');
+            if(db[name]) {
+                box.style.display = 'block';
+                document.getElementById('statusLabel').innerText = db[name].stat;
+                document.getElementById('fill').style.width = db[name].prog + '%';
+                document.getElementById('percent').innerText = "نسبة الإنجاز: " + db[name].prog + "%";
+            } else {
+                alert("الاسم غير موجود في النظام");
+            }
         }
-    }
-</script>
+    </script>
 </body>
 </html>
