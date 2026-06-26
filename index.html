@@ -3,45 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>GFF | نظام تتبع الطلبات</title>
+    <title>مصنع المستقبل الأخضر | GFF</title>
     <style>
-        :root { --green: #0d3a2b; --gold: #d4af37; --cream: #fffdf5; }
-        body { font-family: sans-serif; background-color: var(--cream); margin: 0; padding-bottom: 50px; }
+        :root { --green: #0d3a2b; --gold: #d4af37; --bg: #fdfaf7; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--bg); margin: 0; padding-bottom: 30px; }
         
-        /* ترويسة احترافية */
-        .header { background: white; padding: 25px 15px; text-align: center; border-bottom: 3px solid var(--gold); }
-        .header h1 { color: var(--green); margin: 0; font-size: 1.6rem; }
-        .header h2 { color: var(--green); margin: 5px 0; font-size: 1.2rem; }
-        .header p { color: #555; font-size: 0.85rem; line-height: 1.6; margin-top: 10px; }
+        /* تصميم الرأس بدون خلفية بيضاء مزعجة */
+        .header { padding: 40px 20px 20px; text-align: center; }
+        .header h1 { color: var(--green); margin: 0; font-size: 1.8rem; font-weight: 800; }
+        .header h2 { color: var(--gold); margin: 5px 0; font-size: 1.1rem; }
+        .header p { color: #666; font-size: 0.9rem; line-height: 1.6; max-width: 500px; margin: 15px auto 0; }
         
-        .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 15px; }
-        .stat-card { background: var(--green); color: white; padding: 12px; border-radius: 12px; text-align: center; }
-        .stat-card h2 { color: var(--gold); font-size: 1.1rem; margin: 3px 0; }
-        .stat-card p { font-size: 0.7rem; margin: 0; }
+        /* البطاقات */
+        .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 0 15px; }
+        .stat-card { background: white; border: 1px solid #eee; padding: 15px; border-radius: 20px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.03); }
+        .stat-card h2 { color: var(--green); font-size: 1.3rem; margin: 5px 0; }
+        .stat-card p { color: #999; font-size: 0.75rem; margin: 0; }
 
-        .track-box { background: white; margin: 15px; padding: 20px; border-radius: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
-        .track-box h3 { color: var(--green); margin-top: 0; font-size: 1.2rem; }
-        input { width: 100%; padding: 15px; margin: 10px 0; border: 2px solid #eee; border-radius: 12px; box-sizing: border-box; font-size: 16px; }
+        /* منطقة التتبع */
+        .track-box { background: white; margin: 20px 15px; padding: 25px; border-radius: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border: 1px solid #f0f0f0; }
+        .track-box h3 { color: var(--green); margin-top: 0; font-size: 1.2rem; text-align: center; }
+        input { width: 100%; padding: 15px; margin: 15px 0; border: 2px solid #eee; border-radius: 15px; box-sizing: border-box; font-size: 16px; text-align: center; }
+        button { width: 100%; padding: 15px; background: var(--green); border: none; border-radius: 15px; font-weight: bold; color: white; cursor: pointer; transition: 0.3s; }
         
-        /* زر بحث أخضر */
-        button { width: 100%; padding: 15px; background: var(--green); border: none; border-radius: 12px; font-weight: bold; color: white; cursor: pointer; }
-        
-        .progress-line { display: flex; justify-content: space-between; margin-top: 25px; position: relative; padding: 0 5px; }
-        .step { text-align: center; font-size: 8px; color: #ccc; z-index: 1; }
+        /* شريط المراحل الأنيق */
+        .progress-line { display: flex; justify-content: space-between; margin-top: 30px; position: relative; }
+        .step { text-align: center; font-size: 8px; color: #ccc; }
         .step.active { color: var(--green); font-weight: bold; }
-        .circle { width: 14px; height: 14px; background: #ccc; border-radius: 50%; margin-bottom: 5px; }
-        .circle.active { background: var(--green); box-shadow: 0 0 8px var(--green); }
+        .circle { width: 12px; height: 12px; background: #eee; border-radius: 50%; margin: 0 auto 8px; }
+        .circle.active { background: var(--gold); box-shadow: 0 0 10px var(--gold); }
 
-        .wa-btn { position: fixed; bottom: 20px; right: 20px; z-index: 1000; }
-        .wa-btn img { width: 55px; height: 55px; }
+        .wa-btn { position: fixed; bottom: 20px; right: 20px; z-index: 1000; transition: 0.3s; }
+        .wa-btn img { width: 60px; height: 60px; }
     </style>
 </head>
 <body>
 
     <div class="header">
         <h1>مصنع المستقبل الأخضر</h1>
-        <h2>للأبواب</h2>
-        <p>منذ 2017 نصنع الجودة ونبني الثقة.<br>أبواب داخلية وأبواب WPC بمعايير عالمية مقاومة للمياه والرطوبة لتلبي تطلعات الأفراد وكبرى شركات التطوير العقاري.</p>
+        <h2>GREEN FUTURE FACTORY</h2>
+        <p>نصنع الجودة ونبني الثقة منذ 2017. أبواب WPC بمعايير عالمية تناسب تطلعاتك.</p>
     </div>
 
     <div class="stats-grid">
@@ -53,9 +54,9 @@
 
     <div class="track-box">
         <h3>نظام تتبع حالة الطلب الفوري</h3>
-        <input type="text" id="nameInput" placeholder="أدخل الاسم أو الرقم...">
+        <input type="text" id="nameInput" placeholder="أدخل اسم العميل...">
         <button onclick="track()">بحث عن الحالة</button>
-        <div id="res" style="margin-top:20px;"></div>
+        <div id="res" style="margin-top:25px;"></div>
     </div>
 
     <a href="https://wa.me/966555665136" class="wa-btn">
@@ -91,7 +92,7 @@
                     html += `<div class="step ${activeClass}"><div class="circle ${activeClass}"></div>${s}</div>`;
                 });
                 document.getElementById('res').innerHTML = html + "</div>";
-            } else { alert("عذراً، العميل غير مسجل."); }
+            } else { alert("عذراً، الاسم غير مسجل."); }
         }
     </script>
 </body>
