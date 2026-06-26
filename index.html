@@ -5,11 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>GFF | نظام تتبع الطلبات</title>
     <style>
-        :root { --green: #0d3a2b; --gold: #d4af37; }
-        body { font-family: sans-serif; background: #f9f9f9; margin: 0; padding-bottom: 50px; }
+        :root { --green: #0d3a2b; --gold: #d4af37; --cream: #fffdf5; }
+        body { font-family: sans-serif; background-color: var(--cream); margin: 0; padding-bottom: 50px; }
         
-        .header { background: white; padding: 20px; text-align: center; border-bottom: 3px solid var(--gold); }
-        .header h1 { color: var(--green); margin: 0; font-size: 1.4rem; }
+        /* ترويسة احترافية */
+        .header { background: white; padding: 25px 15px; text-align: center; border-bottom: 3px solid var(--gold); }
+        .header h1 { color: var(--green); margin: 0; font-size: 1.6rem; }
+        .header h2 { color: var(--green); margin: 5px 0; font-size: 1.2rem; }
+        .header p { color: #555; font-size: 0.85rem; line-height: 1.6; margin-top: 10px; }
         
         .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 15px; }
         .stat-card { background: var(--green); color: white; padding: 12px; border-radius: 12px; text-align: center; }
@@ -17,20 +20,29 @@
         .stat-card p { font-size: 0.7rem; margin: 0; }
 
         .track-box { background: white; margin: 15px; padding: 20px; border-radius: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        .track-box h3 { color: var(--green); margin-top: 0; font-size: 1.2rem; }
         input { width: 100%; padding: 15px; margin: 10px 0; border: 2px solid #eee; border-radius: 12px; box-sizing: border-box; font-size: 16px; }
-        button { width: 100%; padding: 15px; background: var(--gold); border: none; border-radius: 12px; font-weight: bold; cursor: pointer; color: black; }
         
-        /* تصميم شريط المراحل الجديد */
-        .progress-line { display: flex; justify-content: space-between; margin-top: 25px; position: relative; padding: 0 10px; }
-        .step { text-align: center; font-size: 9px; color: #ccc; z-index: 1; }
+        /* زر بحث أخضر */
+        button { width: 100%; padding: 15px; background: var(--green); border: none; border-radius: 12px; font-weight: bold; color: white; cursor: pointer; }
+        
+        .progress-line { display: flex; justify-content: space-between; margin-top: 25px; position: relative; padding: 0 5px; }
+        .step { text-align: center; font-size: 8px; color: #ccc; z-index: 1; }
         .step.active { color: var(--green); font-weight: bold; }
-        .circle { width: 15px; height: 15px; background: #ccc; border-radius: 50%; margin-bottom: 5px; }
-        .circle.active { background: var(--gold); box-shadow: 0 0 10px var(--gold); }
+        .circle { width: 14px; height: 14px; background: #ccc; border-radius: 50%; margin-bottom: 5px; }
+        .circle.active { background: var(--green); box-shadow: 0 0 8px var(--green); }
+
+        .wa-btn { position: fixed; bottom: 20px; right: 20px; z-index: 1000; }
+        .wa-btn img { width: 55px; height: 55px; }
     </style>
 </head>
 <body>
 
-    <div class="header"><h1>مصنع المستقبل الأخضر</h1></div>
+    <div class="header">
+        <h1>مصنع المستقبل الأخضر</h1>
+        <h2>للأبواب</h2>
+        <p>منذ 2017 نصنع الجودة ونبني الثقة.<br>أبواب داخلية وأبواب WPC بمعايير عالمية مقاومة للمياه والرطوبة لتلبي تطلعات الأفراد وكبرى شركات التطوير العقاري.</p>
+    </div>
 
     <div class="stats-grid">
         <div class="stat-card">🚪<h2 id="c1">0</h2><p>باب تم إنتاجه</p></div>
@@ -46,16 +58,19 @@
         <div id="res" style="margin-top:20px;"></div>
     </div>
 
+    <a href="https://wa.me/966555665136" class="wa-btn">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+    </a>
+
     <script>
-        // عدادات بسرعة متوسطة (تم زيادة التوقيت لتكون هادئة)
         function startCount(id, end, duration) {
             let current = 0;
-            let stepTime = duration / end;
             let timer = setInterval(() => {
-                current += 1;
+                current += Math.ceil(end/100);
+                if(current > end) current = end;
                 document.getElementById(id).innerText = current + (id === 'c4' ? "" : "+");
-                if (current >= end) clearInterval(timer);
-            }, 30); // زيادة الرقم هنا تزيد من هدوء الحركة
+                if (current == end) clearInterval(timer);
+            }, 30);
         }
         startCount("c1", 15000, 3000); startCount("c2", 1784, 3000); 
         startCount("c3", 267, 3000); startCount("c4", 7, 3000);
@@ -71,7 +86,6 @@
                 const stages = ["استلام", "مقاسات", "مراجعة", "تصنيع", "تغليف", "شحن", "تركيب", "تسليم"];
                 let currentStep = db[name].step;
                 let html = `<strong>الحالة: ${db[name].stat}</strong><div class="progress-line">`;
-                
                 stages.forEach((s, index) => {
                     let activeClass = index < currentStep ? "active" : "";
                     html += `<div class="step ${activeClass}"><div class="circle ${activeClass}"></div>${s}</div>`;
