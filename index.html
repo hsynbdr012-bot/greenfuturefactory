@@ -2,73 +2,57 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>مصنع المستقبل الأخضر | GFF</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GFF | نظام تتبع الطلبات الذكي</title>
     <style>
-        :root { --green: #0d3a2b; --gold: #d4af37; --light: #f4f4f4; }
-        body { font-family: 'Segoe UI', sans-serif; margin: 0; background: var(--light); padding-bottom: 50px; }
+        :root { --green: #0d3a2b; --gold: #d4af37; --white: #ffffff; }
+        body { font-family: 'Segoe UI', sans-serif; background-color: #f8f9fa; margin: 0; padding: 20px; }
+        .container { max-width: 500px; margin: auto; background: var(--white); padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        h2 { color: var(--green); text-align: center; margin-bottom: 25px; }
+        input { width: 100%; padding: 15px; margin-bottom: 15px; border: 2px solid #eee; border-radius: 12px; font-size: 16px; box-sizing: border-box; }
+        button { width: 100%; padding: 15px; background: var(--gold); border: none; border-radius: 12px; font-weight: bold; font-size: 1.1rem; cursor: pointer; transition: 0.3s; }
         
-        /* الشعار */
-        .logo-container { text-align: center; padding: 20px; background: white; }
-        .logo-container img { width: 80%; max-width: 300px; }
-        
-        /* العدادات */
-        .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 15px; }
-        .stat-card { background: var(--green); color: white; padding: 15px 5px; border-radius: 12px; text-align: center; }
-        .stat-card h2 { color: var(--gold); margin: 0; font-size: 1.4rem; }
-        .stat-card p { margin: 5px 0 0; font-size: 0.8rem; }
-        
-        /* التتبع */
-        .tracking-box { background: white; margin: 15px; padding: 20px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-        input { width: 100%; padding: 15px; margin: 10px 0; border: 2px solid #ddd; border-radius: 10px; font-size: 16px; box-sizing: border-box; }
-        button { background: var(--gold); color: black; border: none; padding: 15px; width: 100%; border-radius: 10px; font-weight: bold; font-size: 1rem; }
-        
-        /* شريط التتبع */
-        .progress-bar { display: flex; justify-content: space-between; margin-top: 25px; padding: 0 5px; }
-        .step { font-size: 9px; color: #999; text-align: center; flex: 1; }
-        .step.active { color: var(--green); font-weight: bold; }
-        .step.active::after { content: '●'; display: block; color: var(--gold); }
+        /* شريط التتبع الاحترافي */
+        .progress-container { margin-top: 30px; display: none; }
+        .progress-bg { height: 12px; background: #eee; border-radius: 10px; overflow: hidden; }
+        .progress-fill { height: 100%; background: var(--gold); width: 0%; transition: 1s; }
+        .status-text { margin-top: 15px; font-weight: bold; color: var(--green); text-align: center; font-size: 1.2rem; }
     </style>
 </head>
 <body>
 
-    <div class="logo-container">
-        <img src="https://i.imgur.com/5Jz8QeT.png" alt="GFF Logo">
+<div class="container">
+    <h2>تتبع طلبي الفوري</h2>
+    <input type="text" id="nameInput" placeholder="أدخل اسم العميل...">
+    <button onclick="trackOrder()">بحث عن الطلب</button>
+
+    <div id="progressBox" class="progress-container">
+        <div class="status-text" id="statusLabel"></div>
+        <div class="progress-bg"><div id="progressBar" class="progress-fill"></div></div>
+        <p id="percentText" style="text-align: center; color: #666;"></p>
     </div>
+</div>
 
-    <div class="stats-grid">
-        <div class="stat-card"><h2>15,000+</h2><p>باب تم تصنيعه</p></div>
-        <div class="stat-card"><h2>1,300+</h2><p>عميل تم خدمته</p></div>
-        <div class="stat-card" style="grid-column: span 2;"><h2>40+</h2><p>شركة تطوير عقاري</p></div>
-    </div>
+<script>
+    // قاعدة بيانات تجريبية (أضف أي عميل هنا)
+    const clients = {
+        "بدر": { name: "بدر العتيبي", progress: 80, status: "جاري الشحن 🚚" },
+        "أحمد": { name: "أحمد محمد", progress: 30, status: "مرحلة التصنيع 🛠️" },
+        "سارة": { name: "سارة خالد", progress: 100, status: "تم التسليم بنجاح ✅" }
+    };
 
-    <div class="tracking-box">
-        <h3 style="margin-top:0">تتبع حالة طلبك</h3>
-        <input type="text" id="orderInput" placeholder="أدخل اسم العميل..." inputmode="text">
-        <button onclick="trackOrder()">بحث عن الحالة</button>
-        <div id="result" style="margin-top: 20px;"></div>
-    </div>
-
-    <script>
-        const clients = {
-            "بدر": { name: "بدر العتيبي", stage: 4 },
-            "أحمد": { name: "أحمد محمد", stage: 6 }
-        };
-
-        function trackOrder() {
-            const val = document.getElementById('orderInput').value.trim();
-            const res = document.getElementById('result');
-            if (clients[val]) {
-                const stages = ["استلام", "مقاسات", "تصنيع", "تغليف", "شحن", "تركيب"];
-                let html = `<strong>${clients[val].name}</strong><div class="progress-bar">`;
-                stages.forEach((s, i) => {
-                    html += `<div class="step ${i < clients[val].stage ? 'active' : ''}">${s}</div>`;
-                });
-                res.innerHTML = html + `</div>`;
-            } else {
-                res.innerHTML = "<p style='color:red'>عذراً، الاسم غير موجود.</p>";
-            }
+    function trackOrder() {
+        const name = document.getElementById('nameInput').value.trim();
+        const box = document.getElementById('progressBox');
+        if(clients[name]) {
+            box.style.display = 'block';
+            document.getElementById('statusLabel').innerText = clients[name].status;
+            document.getElementById('progressBar').style.width = clients[name].progress + '%';
+            document.getElementById('percentText').innerText = "نسبة الجاهزية: " + clients[name].progress + "%";
+        } else {
+            alert("عذراً، الاسم غير مسجل في النظام.");
         }
-    </script>
+    }
+</script>
 </body>
 </html>
