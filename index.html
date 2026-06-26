@@ -6,34 +6,24 @@
     <title>مصنع المستقبل الأخضر | GFF</title>
     <style>
         :root { --green: #0d3a2b; --gold: #d4af37; --bg: #fdfaf7; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--bg); margin: 0; padding-bottom: 30px; }
-        
-        /* تصميم الرأس بدون خلفية بيضاء مزعجة */
+        body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg); margin: 0; padding-bottom: 30px; }
         .header { padding: 40px 20px 20px; text-align: center; }
         .header h1 { color: var(--green); margin: 0; font-size: 1.8rem; font-weight: 800; }
         .header h2 { color: var(--gold); margin: 5px 0; font-size: 1.1rem; }
         .header p { color: #666; font-size: 0.9rem; line-height: 1.6; max-width: 500px; margin: 15px auto 0; }
-        
-        /* البطاقات */
         .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 0 15px; }
         .stat-card { background: white; border: 1px solid #eee; padding: 15px; border-radius: 20px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.03); }
         .stat-card h2 { color: var(--green); font-size: 1.3rem; margin: 5px 0; }
         .stat-card p { color: #999; font-size: 0.75rem; margin: 0; }
-
-        /* منطقة التتبع */
-        .track-box { background: white; margin: 20px 15px; padding: 25px; border-radius: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border: 1px solid #f0f0f0; }
-        .track-box h3 { color: var(--green); margin-top: 0; font-size: 1.2rem; text-align: center; }
+        .track-box { background: white; margin: 20px 15px; padding: 25px; border-radius: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
         input { width: 100%; padding: 15px; margin: 15px 0; border: 2px solid #eee; border-radius: 15px; box-sizing: border-box; font-size: 16px; text-align: center; }
-        button { width: 100%; padding: 15px; background: var(--green); border: none; border-radius: 15px; font-weight: bold; color: white; cursor: pointer; transition: 0.3s; }
-        
-        /* شريط المراحل الأنيق */
-        .progress-line { display: flex; justify-content: space-between; margin-top: 30px; position: relative; }
+        button { width: 100%; padding: 15px; background: var(--green); border: none; border-radius: 15px; font-weight: bold; color: white; cursor: pointer; }
+        .progress-line { display: flex; justify-content: space-between; margin-top: 30px; }
         .step { text-align: center; font-size: 8px; color: #ccc; }
         .step.active { color: var(--green); font-weight: bold; }
         .circle { width: 12px; height: 12px; background: #eee; border-radius: 50%; margin: 0 auto 8px; }
         .circle.active { background: var(--gold); box-shadow: 0 0 10px var(--gold); }
-
-        .wa-btn { position: fixed; bottom: 20px; right: 20px; z-index: 1000; transition: 0.3s; }
+        .wa-btn { position: fixed; bottom: 20px; right: 20px; z-index: 1000; }
         .wa-btn img { width: 60px; height: 60px; }
     </style>
 </head>
@@ -42,7 +32,7 @@
     <div class="header">
         <h1>مصنع المستقبل الأخضر</h1>
         <h2>GREEN FUTURE FACTORY</h2>
-        <p>نصنع الجودة ونبني الثقة منذ 2017. أبواب WPC بمعايير عالمية تناسب تطلعاتك.</p>
+        <p>نصنع الجودة ونبني الثقة منذ 2017.</p>
     </div>
 
     <div class="stats-grid">
@@ -64,6 +54,18 @@
     </a>
 
     <script>
+        // --- ابدأ التعديل من هنا ---
+        const db = {
+            "بدر": { step: 4, stat: "🛠️ مرحلة التصنيع" },
+            "حسين بدر": { step: 0, stat: "📝 استلام الطلب" },
+            "حامد": { step: 1, stat: "📏 مرحلة المقاسات" },
+            "علي": { step: 7, stat: "👷 مرحلة التركيب" },
+            "أحمد": { step: 6, stat: "🚚 مرحلة الشحن" },
+            "حسن": { step: 5, stat: "📦 مرحلة التغليف" },
+            "نيازي": { step: 3, stat: "⚙️ مرحلة التجميع" }
+        };
+        // --- انتهى التعديل ---
+
         function startCount(id, end, duration) {
             let current = 0;
             let timer = setInterval(() => {
@@ -76,29 +78,18 @@
         startCount("c1", 15000, 3000); startCount("c2", 1784, 3000); 
         startCount("c3", 267, 3000); startCount("c4", 7, 3000);
 
-        const db = {
-            "بدر": { step: 4, stat: "🛠️ مرحلة التصنيع" },
-"حسين بدر": { step: 0, stat: "📝 استلام الطلب" },
-"حامد": { step: 1, stat: "📏 مرحلة المقاسات" },
-"علي": { step: 7, stat: "👷 مرحلة التركيب" }
-"أحمد": { step: 6, stat: "🚚 مرحلةالشحن" },
-"حسن": { step: 5, stat: "📦 مرحلة التغليف" },
-"نيازي": { step: 3, stat: "⚙️ مرحلة التجميع" },
-            "أحمد": { step: 2, stat: "📏 مراجعة المقاسات" }
-        };
-
         function track() {
             let name = document.getElementById('nameInput').value.trim();
             if(db[name]) {
-                const stages = ["استلام", "مقاسات", "مراجعة", "تصنيع", "تغليف", "شحن", "تركيب", "تسليم"];
+                const stages = ["استلام", "مقاسات", "مراجعة", "تجميع", "تصنيع", "تغليف", "شحن", "تركيب", "تسليم"];
                 let currentStep = db[name].step;
                 let html = `<strong>الحالة: ${db[name].stat}</strong><div class="progress-line">`;
                 stages.forEach((s, index) => {
-                    let activeClass = index < currentStep ? "active" : "";
+                    let activeClass = index <= currentStep ? "active" : "";
                     html += `<div class="step ${activeClass}"><div class="circle ${activeClass}"></div>${s}</div>`;
                 });
                 document.getElementById('res').innerHTML = html + "</div>";
-            } else { alert("عذراً، الاسم غير مسجل."); }
+            } else { alert("عذراً، العميل غير مسجل."); }
         }
     </script>
 </body>
