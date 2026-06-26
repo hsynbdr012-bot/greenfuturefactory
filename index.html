@@ -3,31 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مصنع المستقبل الأخضر | GFF</title>
-    <link rel="stylesheet" href="./css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <title>مصنع المستقبل الأخضر</title>
+    <style>
+        body { font-family: 'Arial', sans-serif; margin: 0; background-color: #f4f4f4; text-align: center; }
+        .hero { background: #0d3a2b; color: white; padding: 50px 20px; }
+        .tracking-box { background: white; padding: 30px; margin: 20px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        input { width: 80%; padding: 12px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 5px; }
+        button { background: #d4af37; color: black; border: none; padding: 12px 30px; border-radius: 5px; font-weight: bold; cursor: pointer; }
+        #status-result { margin-top: 20px; font-size: 18px; color: #0d3a2b; font-weight: bold; }
+    </style>
 </head>
 <body>
 
-    <header class="main-header">
-        <div class="logo">GFF</div>
-        <nav class="nav-links">
-            <a href="#">الرئيسية</a>
-            <a href="#services">الخدمات</a>
-            <a href="#tracking">تتبع الطلب</a>
-        </nav>
-        <a href="https://wa.me/966555665136" class="btn-gold">واتساب</a>
-    </header>
-
     <section class="hero">
-        <div class="hero-overlay"></div>
-        <div class="hero-content">
-            <h1>مصنع المستقبل الأخضر</h1>
-            <p>جودة تدوم للمستقبل - أبواب WPC بلمسة عصرية</p>
-            <a href="#tracking" class="btn-hero">تتبع طلبك الآن</a>
-        </div>
+        <h1>مصنع المستقبل الأخضر</h1>
+        <p>جودة تدوم للمستقبل</p>
     </section>
 
-    <script src="./js/main.js"></script>
+    <section class="tracking-box">
+        <h2>تتبع طلبك</h2>
+        <input type="text" id="order-id" placeholder="أدخل رقم الطلب...">
+        <button onclick="checkOrder()">بحث</button>
+        <div id="status-result"></div>
+    </section>
+
+    <script>
+        function checkOrder() {
+            const id = document.getElementById('order-id').value;
+            const res = document.getElementById('status-result');
+            if(id === "123") {
+                res.innerHTML = "حالة الطلب: في مرحلة التصنيع ✅";
+            } else {
+                res.innerHTML = "عذراً، رقم الطلب غير صحيح.";
+            }
+        }
+    </script>
 </body>
 </html>
