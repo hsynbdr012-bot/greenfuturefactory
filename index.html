@@ -2,54 +2,71 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>GFF | تتبع الطلبات</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>مصنع المستقبل الأخضر | GFF</title>
     <style>
-        :root { --green: #0d3a2b; --gold: #d4af37; }
-        body { font-family: sans-serif; background: #f4f4f4; padding: 20px; text-align: center; }
-        .card { background: white; padding: 25px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); max-width: 500px; margin: auto; }
-        input { width: 100%; padding: 12px; margin: 10px 0; border: 2px solid var(--green); border-radius: 8px; box-sizing: border-box; }
-        button { background: var(--gold); border: none; padding: 12px; width: 100%; border-radius: 8px; font-weight: bold; cursor: pointer; }
+        :root { --green: #0d3a2b; --gold: #d4af37; --light: #f4f4f4; }
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; background: var(--light); padding-bottom: 50px; }
         
-        .progress-bar { display: flex; justify-content: space-between; margin-top: 25px; font-size: 10px; color: #aaa; }
-        .step { flex: 1; position: relative; }
+        /* الشعار */
+        .logo-container { text-align: center; padding: 20px; background: white; }
+        .logo-container img { width: 80%; max-width: 300px; }
+        
+        /* العدادات */
+        .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 15px; }
+        .stat-card { background: var(--green); color: white; padding: 15px 5px; border-radius: 12px; text-align: center; }
+        .stat-card h2 { color: var(--gold); margin: 0; font-size: 1.4rem; }
+        .stat-card p { margin: 5px 0 0; font-size: 0.8rem; }
+        
+        /* التتبع */
+        .tracking-box { background: white; margin: 15px; padding: 20px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        input { width: 100%; padding: 15px; margin: 10px 0; border: 2px solid #ddd; border-radius: 10px; font-size: 16px; box-sizing: border-box; }
+        button { background: var(--gold); color: black; border: none; padding: 15px; width: 100%; border-radius: 10px; font-weight: bold; font-size: 1rem; }
+        
+        /* شريط التتبع */
+        .progress-bar { display: flex; justify-content: space-between; margin-top: 25px; padding: 0 5px; }
+        .step { font-size: 9px; color: #999; text-align: center; flex: 1; }
         .step.active { color: var(--green); font-weight: bold; }
-        .step.active::after { content: '●'; display: block; color: var(--gold); margin-top: 5px; }
+        .step.active::after { content: '●'; display: block; color: var(--gold); }
     </style>
 </head>
 <body>
 
-    <div class="card">
-        <h3>تتبع طلبك</h3>
-        <input type="text" id="orderInput" placeholder="أدخل اسم العميل (مثلاً: أحمد)">
+    <div class="logo-container">
+        <img src="https://i.imgur.com/5Jz8QeT.png" alt="GFF Logo">
+    </div>
+
+    <div class="stats-grid">
+        <div class="stat-card"><h2>15,000+</h2><p>باب تم تصنيعه</p></div>
+        <div class="stat-card"><h2>1,300+</h2><p>عميل تم خدمته</p></div>
+        <div class="stat-card" style="grid-column: span 2;"><h2>40+</h2><p>شركة تطوير عقاري</p></div>
+    </div>
+
+    <div class="tracking-box">
+        <h3 style="margin-top:0">تتبع حالة طلبك</h3>
+        <input type="text" id="orderInput" placeholder="أدخل اسم العميل..." inputmode="text">
         <button onclick="trackOrder()">بحث عن الحالة</button>
-        <div id="result" style="margin-top: 20px; display: none;"></div>
+        <div id="result" style="margin-top: 20px;"></div>
     </div>
 
     <script>
-        // هنا قائمة العملاء التجريبية - أضف أي عدد تريده
         const clients = {
-            "أحمد": { name: "أحمد محمد", stage: 1 },
-            "سارة": { name: "سارة خالد", stage: 3 },
-            "بدر": { name: "بدر العتيبي", stage: 5 },
-            "فيصل": { name: "فيصل القحطاني", stage: 7 },
-            "نورة": { name: "نورة عبدالله", stage: 8 }
+            "بدر": { name: "بدر العتيبي", stage: 4 },
+            "أحمد": { name: "أحمد محمد", stage: 6 }
         };
 
         function trackOrder() {
             const val = document.getElementById('orderInput').value.trim();
             const res = document.getElementById('result');
-            
             if (clients[val]) {
-                const stages = ["استلام", "مقاسات", "تصنيع", "تجميع", "تغليف", "شحن", "تركيب", "تسليم"];
+                const stages = ["استلام", "مقاسات", "تصنيع", "تغليف", "شحن", "تركيب"];
                 let html = `<strong>${clients[val].name}</strong><div class="progress-bar">`;
                 stages.forEach((s, i) => {
                     html += `<div class="step ${i < clients[val].stage ? 'active' : ''}">${s}</div>`;
                 });
-                res.style.display = 'block';
                 res.innerHTML = html + `</div>`;
             } else {
-                res.style.display = 'block';
-                res.innerHTML = "عذراً، لم نجد طلباً بهذا الاسم.";
+                res.innerHTML = "<p style='color:red'>عذراً، الاسم غير موجود.</p>";
             }
         }
     </script>
