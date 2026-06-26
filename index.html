@@ -3,64 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>GFF | تتبع طلباتك</title>
+    <title>مصنع المستقبل الأخضر | GFF</title>
     <style>
-        :root { 
-            --primary: #0f3d32; /* أخضر غامق ملكي */
-            --secondary: #b89764; /* ذهبي هادئ */
-            --bg: #f9f7f2; /* كريمي فاتح جداً ومريح */
-        }
-        body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg); margin: 0; padding-bottom: 80px; }
+        :root { --green: #0d3a2b; --gold: #d4af37; --bg: #fdfaf7; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--bg); margin: 0; padding-bottom: 30px; }
         
-        .header { padding: 40px 20px; text-align: center; }
-        .header h1 { color: var(--primary); margin: 0; font-size: 1.7rem; font-weight: 700; }
-        .header p { color: #555; font-size: 0.9rem; margin-top: 10px; }
+        /* تصميم الرأس بدون خلفية بيضاء مزعجة */
+        .header { padding: 40px 20px 20px; text-align: center; }
+        .header h1 { color: var(--green); margin: 0; font-size: 1.8rem; font-weight: 800; }
+        .header h2 { color: var(--gold); margin: 5px 0; font-size: 1.1rem; }
+        .header p { color: #666; font-size: 0.9rem; line-height: 1.6; max-width: 500px; margin: 15px auto 0; }
         
-        .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 0 15px; }
-        .stat-card { background: white; padding: 15px; border-radius: 15px; text-align: center; border: 1px solid #efeae4; }
-        .stat-card h2 { color: var(--primary); margin: 0; font-size: 1.2rem; }
-        .stat-card p { color: #999; font-size: 0.7rem; margin: 0; }
+        /* البطاقات */
+        .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 0 15px; }
+        .stat-card { background: white; border: 1px solid #eee; padding: 15px; border-radius: 20px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.03); }
+        .stat-card h2 { color: var(--green); font-size: 1.3rem; margin: 5px 0; }
+        .stat-card p { color: #999; font-size: 0.75rem; margin: 0; }
 
-        .track-box { background: white; margin: 20px 15px; padding: 25px; border-radius: 25px; box-shadow: 0 10px 25px rgba(0,0,0,0.04); }
-        input { width: 100%; padding: 15px; margin: 15px 0; border: 1px solid #ddd; border-radius: 12px; box-sizing: border-box; text-align: center; }
-        button { width: 100%; padding: 15px; background: var(--primary); border: none; border-radius: 12px; color: white; font-weight: bold; }
+        /* منطقة التتبع */
+        .track-box { background: white; margin: 20px 15px; padding: 25px; border-radius: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border: 1px solid #f0f0f0; }
+        .track-box h3 { color: var(--green); margin-top: 0; font-size: 1.2rem; text-align: center; }
+        input { width: 100%; padding: 15px; margin: 15px 0; border: 2px solid #eee; border-radius: 15px; box-sizing: border-box; font-size: 16px; text-align: center; }
+        button { width: 100%; padding: 15px; background: var(--green); border: none; border-radius: 15px; font-weight: bold; color: white; cursor: pointer; transition: 0.3s; }
         
-        /* زر الواتساب العائم في الزاوية بعيداً عن المحتوى */
-        .wa-float { position: fixed; bottom: 20px; right: 20px; z-index: 9999; }
-        .wa-float img { width: 55px; height: 55px; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1)); }
+        /* شريط المراحل الأنيق */
+        .progress-line { display: flex; justify-content: space-between; margin-top: 30px; position: relative; }
+        .step { text-align: center; font-size: 8px; color: #ccc; }
+        .step.active { color: var(--green); font-weight: bold; }
+        .circle { width: 12px; height: 12px; background: #eee; border-radius: 50%; margin: 0 auto 8px; }
+        .circle.active { background: var(--gold); box-shadow: 0 0 10px var(--gold); }
 
-        /* شريط التتبع */
-        .progress-line { display: flex; justify-content: space-between; margin-top: 30px; overflow-x: auto; padding-bottom: 10px; }
-        .step { text-align: center; font-size: 9px; color: #aaa; min-width: 40px; }
-        .step.active { color: var(--primary); font-weight: bold; }
-        .circle { width: 12px; height: 12px; background: #eee; border-radius: 50%; margin: 0 auto 5px; }
-        .circle.active { background: var(--secondary); }
+        .wa-btn { position: fixed; bottom: 20px; right: 20px; z-index: 1000; transition: 0.3s; }
+        .wa-btn img { width: 60px; height: 60px; }
     </style>
 </head>
 <body>
 
     <div class="header">
         <h1>مصنع المستقبل الأخضر</h1>
-        <p>جودة تدوم لسنوات.. بمعايير عالمية</p>
+        <h2>GREEN FUTURE FACTORY</h2>
+        <p>نصنع الجودة ونبني الثقة منذ 2017. أبواب WPC بمعايير عالمية تناسب تطلعاتك.</p>
     </div>
 
     <div class="stats-grid">
-        <div class="stat-card"><h2>15,000+</h2><p>باب تم إنتاجه</p></div>
-        <div class="stat-card"><h2>1,784+</h2><p>عميل سعيد</p></div>
+        <div class="stat-card">🚪<h2 id="c1">0</h2><p>باب تم إنتاجه</p></div>
+        <div class="stat-card">👥<h2 id="c2">0</h2><p>عميل تم خدمته</p></div>
+        <div class="stat-card">🏢<h2 id="c3">0</h2><p>شركات تطوير</p></div>
+        <div class="stat-card">⏳<h2 id="c4">0</h2><p>سنوات خبرة</p></div>
     </div>
 
     <div class="track-box">
-        <h3 style="text-align: center; color: var(--primary);">تتبع حالة طلبك</h3>
+        <h3>نظام تتبع حالة الطلب الفوري</h3>
         <input type="text" id="nameInput" placeholder="أدخل اسم العميل...">
         <button onclick="track()">بحث عن الحالة</button>
         <div id="res" style="margin-top:25px;"></div>
     </div>
 
-    <a href="https://wa.me/966555665136" class="wa-float">
+    <a href="https://wa.me/966555665136" class="wa-btn">
         <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
     </a>
 
     <script>
+        function startCount(id, end, duration) {
+            let current = 0;
+            let timer = setInterval(() => {
+                current += Math.ceil(end/100);
+                if(current > end) current = end;
+                document.getElementById(id).innerText = current + (id === 'c4' ? "" : "+");
+                if (current == end) clearInterval(timer);
+            }, 30);
+        }
+        startCount("c1", 15000, 3000); startCount("c2", 1784, 3000); 
+        startCount("c3", 267, 3000); startCount("c4", 7, 3000);
+
         const db = {
             "بدر": { step: 4, stat: "🛠️ مرحلة التصنيع" },
             "أحمد": { step: 2, stat: "📏 مراجعة المقاسات" }
@@ -71,13 +86,13 @@
             if(db[name]) {
                 const stages = ["استلام", "مقاسات", "مراجعة", "تصنيع", "تغليف", "شحن", "تركيب", "تسليم"];
                 let currentStep = db[name].step;
-                let html = `<div style="text-align:center; margin-bottom:15px; font-weight:bold; color:var(--primary);">${db[name].stat}</div><div class="progress-line">`;
+                let html = `<strong>الحالة: ${db[name].stat}</strong><div class="progress-line">`;
                 stages.forEach((s, index) => {
                     let activeClass = index < currentStep ? "active" : "";
                     html += `<div class="step ${activeClass}"><div class="circle ${activeClass}"></div>${s}</div>`;
                 });
                 document.getElementById('res').innerHTML = html + "</div>";
-            } else { alert("الاسم غير مسجل"); }
+            } else { alert("عذراً، الاسم غير مسجل."); }
         }
     </script>
 </body>
