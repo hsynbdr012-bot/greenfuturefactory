@@ -54,17 +54,14 @@
     </a>
 
     <script>
-        // --- ابدأ التعديل من هنا ---
-        const db = {
-            "بدر": { step: 4, stat: "🛠️ مرحلة التصنيع" },
-            "حسين بدر": { step: 0, stat: "📝 استلام الطلب" },
-            "حامد": { step: 1, stat: "📏 مرحلة المقاسات" },
-            "علي": { step: 7, stat: "👷 مرحلة التركيب" },
-            "أحمد": { step: 6, stat: "🚚 مرحلة الشحن" },
-            "حسن": { step: 5, stat: "📦 مرحلة التغليف" },
-            "نيازي": { step: 3, stat: "⚙️ مرحلة التجميع" }
-        };
-        // --- انتهى التعديل ---
+        // رابط بياناتك من Google Sheets
+        const SPREADSHEET_URL = 'https://script.google.com/macros/s/AKfycbzQYiJB1Aa7c4a7LU5rPEikA4W5ZnH2PMVo5iRoNONop-I_yrB7Gz81d2tKOZuh7W7NSw/exec';
+        let db = {};
+
+        // تحميل البيانات عند فتح الصفحة
+        fetch(SPREADSHEET_URL)
+            .then(res => res.json())
+            .then(data => { db = data; });
 
         function startCount(id, end, duration) {
             let current = 0;
